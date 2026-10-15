@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Office lock files (e.g. ~$Deck.pptx while a file is open)
+~$*
+
+# Secrets
+.env
+.env.*
+!.env.example
+default-env.json
+
+# Node
+node_modules/
+npm-debug.log*
+dist/
+gen/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp

@@ -1,0 +1,900 @@
+<title>Right AI EventStorming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Public+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: workshop wall. Header + controls, then one horizontally scrolling board of bounded-context frames, then reference sections. */
+:root{
+  --bg:#EEF0EC; --wall:#E2E5DF; --surface:#FFFFFF; --fg:#1D2420; --muted:#5B655F; --line:#B9C0B8; --accent:#0F5E4C; --tape:#E9DFB8;
+  /* sticky notes keep paper colours in both themes */
+  --n-event:#F7A54E; --n-command:#86BCEB; --n-policy:#CDAAE6; --n-read:#A6DA9F; --n-agg:#F5E27C; --n-actor:#FCF3B8; --n-ext:#F3AFCB; --n-hot:#E5484D;
+  --n-ink:#1E1A16; --n-hot-ink:#FFFFFF;
+  --shadow:0 1px 0 rgba(0,0,0,.06),0 3px 6px rgba(30,40,30,.14);
+  --f-note:"Kalam","Comic Neue","Segoe Print",cursive;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141917; --wall:#1C2320; --surface:#222A27; --fg:#E6ECE8; --muted:#9AA79F; --line:#3E4A45; --accent:#7FD3B9; --tape:#4A4630;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 4px 10px rgba(0,0,0,.45); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141917; --wall:#1C2320; --surface:#222A27; --fg:#E6ECE8; --muted:#9AA79F; --line:#3E4A45; --accent:#7FD3B9; --tape:#4A4630;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 4px 10px rgba(0,0,0,.45); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 56px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+h2{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lede{max-width:68ch;color:var(--muted);margin:.6rem 0 0}
+header{display:grid;gap:.35rem}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:22px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{font:600 .85rem var(--f-body);border:0;background:transparent;color:var(--muted);padding:.4rem .95rem;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+.seg button:focus-visible,.chip:focus-visible,.jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 .78rem var(--f-body);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.25rem .55rem;cursor:pointer}
+.chip i{width:14px;height:14px;border-radius:2px;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.chip[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
+.jump{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;font-size:.82rem}
+.jump a{color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--line)}
+.jump a:hover{color:var(--fg)}
+
+/* Board */
+.board-shell{margin-top:16px;background:var(--wall);border-radius:10px;border:1px solid var(--line);position:relative}
+.board{overflow-x:auto;overflow-y:hidden;padding:44px 22px 26px;scroll-behavior:smooth}
+.timeline{position:absolute;left:22px;right:22px;top:16px;display:flex;align-items:center;gap:8px;font:500 .7rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.timeline::after{content:"";flex:1;height:1px;background:var(--line)}
+.timeline span:last-child{order:3}
+.track{display:flex;gap:26px;width:max-content;align-items:stretch}
+.ctx{position:relative;border:2px dashed var(--line);border-radius:6px;padding:34px 14px 16px;display:flex;gap:10px;align-items:flex-start;scroll-margin-left:20px}
+.ctx-label{position:absolute;top:-14px;left:14px;background:var(--tape);color:var(--fg);font:700 .8rem var(--f-body);letter-spacing:.02em;padding:.3rem .7rem;transform:rotate(-1.2deg);box-shadow:var(--shadow);white-space:nowrap}
+.ctx-label small{font:500 .68rem var(--f-mono);color:var(--muted);margin-left:.4rem;letter-spacing:.06em}
+.col{display:flex;flex-direction:column;gap:9px;width:150px;flex:none}
+.note{font-family:var(--f-note);font-size:.98rem;line-height:1.18;color:var(--n-ink);padding:10px 10px 12px;min-height:92px;box-shadow:var(--shadow);position:relative;overflow-wrap:anywhere}
+.note .k{display:block;font:500 .6rem var(--f-mono);letter-spacing:.09em;text-transform:uppercase;opacity:.62;margin-bottom:4px}
+.note.event{background:var(--n-event)}
+.note.command{background:var(--n-command)}
+.note.policy{background:var(--n-policy)}
+.note.read{background:var(--n-read)}
+.note.agg{background:var(--n-agg);min-height:70px}
+.note.actor{background:var(--n-actor);min-height:0;width:104px;font-size:.88rem;padding:7px 8px}
+.note.ext{background:var(--n-ext);min-height:70px}
+.note.hot{background:var(--n-hot);color:var(--n-hot-ink);transform:rotate(-3deg);font-size:.92rem}
+.note.hot .k{opacity:.85}
+.note.pivotal{outline:3px solid var(--n-ink);outline-offset:-3px}
+.note.pivotal::after{content:"PIVOTAL";position:absolute;right:6px;bottom:4px;font:600 .55rem var(--f-mono);letter-spacing:.1em;opacity:.7}
+.note.loop::before{content:"↺ feeds Enablement";position:absolute;left:8px;bottom:-20px;font:500 .68rem var(--f-mono);color:var(--accent);white-space:nowrap}
+.col.empty{display:none}
+.hint{font:500 .72rem var(--f-mono);color:var(--muted);padding:0 22px 12px;letter-spacing:.04em}
+
+/* Reference sections */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px;margin-top:40px}
+section > h2{margin-bottom:.8rem}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.list li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;min-width:0}
+.tag{font:600 .7rem var(--f-mono);padding:.15rem .4rem;border-radius:3px;background:var(--n-hot);color:var(--n-hot-ink);margin-top:.15rem}
+.tag.ctxt{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500}
+.list p{margin:0}
+.list .where{display:block;font-size:.8rem;color:var(--muted)}
+dl.gloss{margin:0;display:grid;gap:10px}
+dl.gloss dt{font-weight:700}
+dl.gloss dd{margin:0;color:var(--muted)}
+.tbl-wrap{overflow-x:auto;margin-top:.2rem}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .7rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td:first-child{font-weight:700;white-space:nowrap}
+.full{margin-top:40px}
+.foot{margin-top:36px;font-size:.8rem;color:var(--muted);max-width:75ch}
+.foot a{color:var(--accent)}
+
+/* Edit mode */
+.btn{font:600 .82rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:.42rem .9rem;border-radius:999px;cursor:pointer}
+.btn:focus-visible,.ntool button:focus-visible,.ntool select:focus-visible,.colfoot button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn[disabled]{opacity:.5;cursor:default}
+.editbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.status{font:500 .74rem var(--f-mono);color:var(--muted)}
+.status.warn{color:var(--n-hot)}
+.editing .note .x{outline:none;cursor:text;display:block;min-height:1.2em}
+.editing .note:focus-within{box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+.ntool{display:none;position:absolute;left:0;right:0;top:-30px;gap:2px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px;z-index:5;box-shadow:var(--shadow);width:max-content}
+.editing .note:hover .ntool,.editing .note:focus-within .ntool{display:flex}
+.ntool button,.ntool select{font:500 .72rem var(--f-body);color:var(--fg);background:transparent;border:0;border-radius:4px;padding:3px 6px;cursor:pointer}
+.ntool select{border:1px solid var(--line);padding:2px 4px;background:var(--surface)}
+.ntool button:hover{background:var(--wall)}
+.ntool .del{color:var(--n-hot)}
+.colfoot{display:none;gap:4px;flex-wrap:wrap}
+.editing .colfoot{display:flex}
+.colfoot button{font:500 .72rem var(--f-mono);color:var(--muted);background:transparent;border:1px dashed var(--line);border-radius:4px;padding:4px 6px;cursor:pointer}
+.colfoot button:hover{color:var(--fg);border-color:var(--fg)}
+.editing .col.empty{display:flex;min-height:92px}
+.editing .ctx-label{white-space:normal}
+.editing .ctx-label [contenteditable]{outline:none;border-bottom:1px dashed var(--muted);cursor:text}
+.ctx-del{display:none;margin-left:.5rem;font:600 .65rem var(--f-mono);color:var(--n-hot);background:transparent;border:0;cursor:pointer}
+.editing .ctx-del{display:inline}
+.addctx{display:none;align-self:center;font:600 .8rem var(--f-body);color:var(--muted);border:2px dashed var(--line);background:transparent;border-radius:6px;padding:1.2rem .9rem;cursor:pointer}
+.editing .addctx{display:block}
+.editing .board{padding-top:64px}
+.editing .note{margin-top:0}
+@media (prefers-reduced-motion: reduce){.board{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">SAP Challenge · EventStorming · Big Picture</span>
+    <h1>Right AI lifecycle</h1>
+    <p class="lede">How an automation moves from a trained process owner's idea to a running agent, and how the dashboard turns agents that keep repeating themselves into workflows. Top-level and use-case neutral. Values like thresholds are examples for discussion.</p>
+  </header>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Board level">
+      <button id="v-big" aria-pressed="true">Big Picture: events</button>
+      <button id="v-detail" aria-pressed="false">Process detail</button>
+    </div>
+    <div class="legend" id="legend" aria-label="Show or hide note types"></div>
+    <div class="editbar">
+      <button class="btn" id="edit-toggle">Edit board</button>
+      <button class="btn primary" id="save" hidden>Save changes</button>
+      <button class="btn" id="discard" hidden>Discard</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+  </div>
+  <nav class="jump" id="jump" aria-label="Jump to bounded context"></nav>
+
+  <div class="board-shell">
+    <div class="timeline"><span>Time</span><span>→</span></div>
+    <div class="board" id="board" tabindex="0" aria-label="EventStorming board, scroll horizontally">
+      <div class="track" id="track"></div>
+    </div>
+    <div class="hint" id="hint">Scroll sideways along the timeline · pivotal events have a heavy outline · red notes are hotspots</div>
+  </div>
+
+  <div class="grid2">
+    <section>
+      <h2>Hotspots to resolve</h2>
+      <ul class="list" id="hotlist"></ul>
+    </section>
+    <section>
+      <h2>Ubiquitous language</h2>
+      <dl class="gloss">
+        <div><dt>Automation ladder</dt><dd>Rule → workflow → classic ML → single GenAI call → agent → multi-agent. Use the lowest step that does the job.</dd></div>
+        <div><dt>Process owner</dt><dd>Person in a business unit who requests and is accountable for an automation.</dd></div>
+        <div><dt>Triage</dt><dd>Short decision tree run before anything is built. Its result is the recommended ladder step.</dd></div>
+        <div><dt>Output similarity / path similarity</dt><dd>How alike an agent's replies are, and how alike its tool-call sequences are, across runs. Computed with simple statistics from logs.</dd></div>
+        <div><dt>Uniform agent</dt><dd>An agent whose runs have become near-identical. It behaves like a workflow and costs like an agent.</dd></div>
+        <div><dt>Conversion</dt><dd>Turning the frequent paths of a uniform agent into a workflow. The agent keeps only the exceptions.</dd></div>
+        <div><dt>Exception scope</dt><dd>The cases an agent still handles after conversion.</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <section class="full">
+    <h2>From bounded contexts to services</h2>
+    <p class="lede" style="margin:0 0 .8rem">Lecture heuristic: one bounded context becomes one component, and a team owns at most two. First cut, expected to change.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Bounded context</th><th>Owns (aggregate)</th><th>Publishes</th><th>Listens to</th><th>Likely owner</th></tr></thead>
+        <tbody>
+          <tr><td>Enablement</td><td>Learner training record</td><td>Ladder training completed</td><td>Process owner role assigned, Conversion case added to training</td><td>L&amp;D with CIO office</td></tr>
+          <tr><td>Automation Triage</td><td>Automation use case</td><td>Automation approach decided</td><td>Ladder training completed</td><td>CIO office</td></tr>
+          <tr><td>Build &amp; Deploy</td><td>Automation</td><td>Automation deployed, Agent registered for monitoring</td><td>Automation approach decided, Conversion approved</td><td>AI platform team</td></tr>
+          <tr><td>Automation Run</td><td>Automation run</td><td>Run logged, Request escalated to human</td><td>Automation deployed</td><td>Business unit + platform</td></tr>
+          <tr><td>Agent Monitoring</td><td>Agent profile</td><td>Agent flagged as uniform, Agent flagged as unused</td><td>Run logged, Agent registered for monitoring</td><td>CIO office (dashboard)</td></tr>
+          <tr><td>Agent Conversion</td><td>Conversion case</td><td>Agent scope reduced, Agent retired, Conversion case added to training</td><td>Agent flagged as uniform / unused</td><td>AI platform team</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="foot">Method: Brandolini's EventStorming as taught in the IS 615 lecture (chaotic exploration → timeline → consistency → bounded contexts → detail design) and SAP's <a href="https://github.com/SAP/curated-resources-for-domain-driven-design/blob/main/knowledgebase/tools/eventstorming.md" target="_blank" rel="noopener">curated DDD guide</a>. Colours follow the standard notation. The specific use case (e.g. HR recruiting) will be modelled separately at process level.</p>
+</div>
+
+<script type="application/json" id="board-data">{
+ "contexts": [
+  {
+   "id": "enablement",
+   "name": "Enablement",
+   "sub": "training",
+   "cols": [
+    [
+     {
+      "t": "event",
+      "x": "Process owner role assigned"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "When someone becomes a process owner → assign ladder training"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "L&D"
+     },
+     {
+      "t": "command",
+      "x": "Assign ladder training"
+     },
+     {
+      "t": "ext",
+      "x": "Learning platform"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Ladder training assigned"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "Process owner"
+     },
+     {
+      "t": "command",
+      "x": "Complete training"
+     },
+     {
+      "t": "read",
+      "x": "Ladder handbook with worked examples"
+     },
+     {
+      "t": "agg",
+      "x": "Learner training record"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Ladder training completed"
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Mandatory for everyone who requests automations, or only for agent builders?"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "triage",
+   "name": "Automation Triage",
+   "sub": "choose the step",
+   "cols": [
+    [
+     {
+      "t": "actor",
+      "x": "Process owner"
+     },
+     {
+      "t": "command",
+      "x": "Raise automation need"
+     },
+     {
+      "t": "read",
+      "x": "Inventory of existing automations"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Automation need raised"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Requester trained? If not → training first"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "Process owner"
+     },
+     {
+      "t": "command",
+      "x": "Answer triage questions"
+     },
+     {
+      "t": "read",
+      "x": "Ladder triage tree"
+     },
+     {
+      "t": "agg",
+      "x": "Automation use case"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Triage completed"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Steps always the same? → rule or workflow. Open-ended? → GenAI call or agent"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Automation approach decided",
+      "pivotal": true
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Who can overrule the recommendation? Does an agent need a written reason?"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "build",
+   "name": "Build & Deploy",
+   "sub": "",
+   "cols": [
+    [
+     {
+      "t": "actor",
+      "x": "AI engineer"
+     },
+     {
+      "t": "command",
+      "x": "Build automation"
+     },
+     {
+      "t": "ext",
+      "x": "Workflow engine / agent platform"
+     },
+     {
+      "t": "agg",
+      "x": "Automation"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Automation built"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "Process owner"
+     },
+     {
+      "t": "command",
+      "x": "Approve go-live"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Automation deployed",
+      "pivotal": true
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Is it an agent? → always register for monitoring"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Agent registered for monitoring"
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Agents built before the programme: how do they get into the inventory?"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "run",
+   "name": "Automation Run",
+   "sub": "daily operation",
+   "cols": [
+    [
+     {
+      "t": "actor",
+      "x": "Requester"
+     },
+     {
+      "t": "command",
+      "x": "Submit request"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Request received"
+     }
+    ],
+    [
+     {
+      "t": "command",
+      "x": "Handle request"
+     },
+     {
+      "t": "agg",
+      "x": "Automation run"
+     },
+     {
+      "t": "ext",
+      "x": "LLM / cloud provider"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Unknown case or low confidence? → hand to a human"
+     }
+    ],
+    [
+     {
+      "t": "command",
+      "x": "Close request"
+     },
+     {
+      "t": "command",
+      "x": "Escalate to human"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Request completed"
+     },
+     {
+      "t": "event",
+      "x": "Request escalated to human"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Run logged"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "monitor",
+   "name": "Agent Monitoring",
+   "sub": "the dashboard",
+   "cols": [
+    [
+     {
+      "t": "policy",
+      "x": "Every night → collect run logs"
+     },
+     {
+      "t": "ext",
+      "x": "Agent platform logs"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "Monitoring service"
+     },
+     {
+      "t": "command",
+      "x": "Calculate agent metrics"
+     },
+     {
+      "t": "read",
+      "x": "Run logs: tokens, steps, outputs"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Token usage calculated"
+     },
+     {
+      "t": "event",
+      "x": "Output and path similarity calculated"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Dashboard updated"
+     },
+     {
+      "t": "read",
+      "x": "Agent dashboard: token usage, similarity, recommendation"
+     },
+     {
+      "t": "agg",
+      "x": "Agent profile"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Similarity above threshold for 4 weeks? → flag as uniform"
+     },
+     {
+      "t": "policy",
+      "x": "No runs for 90 days? → flag as unused"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Agent flagged as uniform",
+      "pivotal": true
+     },
+     {
+      "t": "event",
+      "x": "Agent flagged as unused"
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Similar text is not the same as similar steps. Which similarity counts?"
+     },
+     {
+      "t": "hot",
+      "x": "Tokens are not energy. Providers give no reliable emissions per token."
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Logs may hold personal data (GDPR) and allow conclusions about employees (works council, § 87 BetrVG)"
+     }
+    ]
+   ]
+  },
+  {
+   "id": "convert",
+   "name": "Agent Conversion",
+   "sub": "agent → workflow",
+   "cols": [
+    [
+     {
+      "t": "actor",
+      "x": "Process owner"
+     },
+     {
+      "t": "command",
+      "x": "Review recommendation"
+     },
+     {
+      "t": "read",
+      "x": "Most frequent paths from logs"
+     },
+     {
+      "t": "read",
+      "x": "Estimated token savings per month"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "Always owner approval, or auto-convert below a risk level?"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Conversion approved"
+     },
+     {
+      "t": "event",
+      "x": "Conversion rejected with reason"
+     }
+    ],
+    [
+     {
+      "t": "actor",
+      "x": "AI engineer"
+     },
+     {
+      "t": "command",
+      "x": "Derive workflow from frequent paths"
+     },
+     {
+      "t": "agg",
+      "x": "Conversion case"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Workflow derived"
+     }
+    ],
+    [
+     {
+      "t": "command",
+      "x": "Deploy workflow and route standard cases to it"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Agent scope reduced to exceptions",
+      "pivotal": true
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "No exceptions left for 90 days? → retire agent"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Agent retired"
+     }
+    ],
+    [
+     {
+      "t": "policy",
+      "x": "When a conversion closes → add it to training as a case"
+     }
+    ],
+    [
+     {
+      "t": "event",
+      "x": "Conversion case added to training",
+      "loop": true
+     }
+    ],
+    [
+     {
+      "t": "hot",
+      "x": "Who pays for the conversion effort: the business unit or the central CIO budget?"
+     }
+    ]
+   ]
+  }
+ ]
+}</script>
+<script>
+(function(){
+const TYPES = {
+  event:{label:"Domain event", k:"Event"},
+  command:{label:"Command", k:"Command"},
+  policy:{label:"Policy / decision", k:"Policy"},
+  read:{label:"Read model", k:"Read model"},
+  agg:{label:"Aggregate", k:"Aggregate"},
+  actor:{label:"Actor", k:"Actor"},
+  ext:{label:"External system", k:"External"},
+  hot:{label:"Hotspot", k:"Hotspot"}
+};
+const SKELETON = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>';
+const BIG_TYPES = new Set(["event","hot"]);
+const $ = id => document.getElementById(id);
+
+let pageSource = "";
+let saved = null;          // last saved data (string)
+let data = null;           // working copy
+const ui = { view:"big", hidden:new Set(), editing:false, dirty:false, busy:false };
+
+function loadData(){
+  try { return JSON.parse($("board-data").textContent); } catch(e){ return {contexts:[]}; }
+}
+const visible = t => !ui.hidden.has(t) && (ui.view==="detail" || BIG_TYPES.has(t));
+const uid = () => "c" + Math.random().toString(36).slice(2,8);
+
+function markDirty(){ ui.dirty = JSON.stringify(data) !== saved; status(); }
+function status(msg, warn){
+  const s=$("status");
+  s.classList.toggle("warn", !!warn);
+  s.textContent = msg || (ui.editing ? (ui.dirty ? "Unsaved changes" : "No changes yet") : "");
+  $("save").disabled = !ui.dirty || ui.busy;
+}
+
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+
+function noteEl(note, ci, coli, ni){
+  const n = el("div", `note ${note.t}${note.pivotal?" pivotal":""}${note.loop?" loop":""}`);
+  n.appendChild(el("span","k",TYPES[note.t].k));
+  const x = el("span","x",note.x);
+  if(ui.editing){
+    x.contentEditable = "plaintext-only";
+    if(x.contentEditable !== "plaintext-only") x.contentEditable = "true";
+    x.spellcheck = true;
+    x.setAttribute("role","textbox"); x.setAttribute("aria-label", TYPES[note.t].label + " text");
+    x.addEventListener("input", ()=>{ note.x = x.innerText.trim(); markDirty(); });
+    x.addEventListener("keydown", e=>{ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); x.blur(); } });
+    x.addEventListener("paste", e=>{ e.preventDefault(); const t=(e.clipboardData||window.clipboardData).getData("text/plain"); document.execCommand("insertText", false, t); });
+    x.addEventListener("blur", ()=>{ if(!note.x){ removeNote(ci,coli,ni); } else renderHot(); });
+    n.appendChild(toolbar(note, ci, coli, ni));
+  }
+  n.appendChild(x);
+  return n;
+}
+
+function toolbar(note, ci, coli, ni){
+  const tb = el("div","ntool");
+  const sel = el("select"); sel.setAttribute("aria-label","Note type");
+  for(const [t,v] of Object.entries(TYPES)){ const o=el("option",null,v.label); o.value=t; if(t===note.t) o.selected=true; sel.appendChild(o); }
+  sel.onchange = ()=>{ note.t = sel.value; if(note.t!=="event") delete note.pivotal; changed(); };
+  tb.appendChild(sel);
+  const b = (label, title, fn, cls) => { const x=el("button",cls,label); x.type="button"; x.title=title; x.setAttribute("aria-label",title); x.onmousedown=e=>e.preventDefault(); x.onclick=fn; tb.appendChild(x); };
+  if(note.t==="event") b(note.pivotal?"★":"☆", note.pivotal?"Unmark pivotal":"Mark as pivotal", ()=>{ note.pivotal=!note.pivotal; if(!note.pivotal) delete note.pivotal; changed(); });
+  b("↑","Move up",()=>moveNote(ci,coli,ni,0,-1));
+  b("↓","Move down",()=>moveNote(ci,coli,ni,0,1));
+  b("←","Move to previous column",()=>moveNote(ci,coli,ni,-1,0));
+  b("→","Move to next column",()=>moveNote(ci,coli,ni,1,0));
+  b("✕","Delete note",()=>removeNote(ci,coli,ni),"del");
+  return tb;
+}
+
+function moveNote(ci,coli,ni,dc,dn){
+  const ctx=data.contexts[ci], col=ctx.cols[coli];
+  if(dn){ const j=ni+dn; if(j<0||j>=col.length) return; [col[ni],col[j]]=[col[j],col[ni]]; }
+  if(dc){
+    let tc=coli+dc;
+    if(tc<0) return;
+    if(tc>=ctx.cols.length) ctx.cols.push([]);
+    const [n]=col.splice(ni,1); ctx.cols[tc].push(n);
+  }
+  changed();
+}
+function removeNote(ci,coli,ni){ data.contexts[ci].cols[coli].splice(ni,1); changed(); }
+function changed(){ markDirty(); render(); }
+
+function render(){
+  document.body.classList.toggle("editing", ui.editing);
+  const track=$("track"); track.innerHTML="";
+  data.contexts.forEach((c,ci)=>{
+    if(!c.id) c.id = uid();
+    const f=el("div","ctx"); f.id="ctx-"+c.id;
+    const lab=el("div","ctx-label");
+    const nm=el("span",null,c.name), sb=el("small",null,c.sub||"");
+    lab.appendChild(nm); if(c.sub||ui.editing) lab.appendChild(sb);
+    if(ui.editing){
+      for(const [node,key,ph] of [[nm,"name","Context name"],[sb,"sub","subtitle"]]){
+        node.contentEditable="true"; node.setAttribute("aria-label",ph);
+        if(!node.textContent && key==="sub") node.textContent="";
+        node.addEventListener("input",()=>{ c[key]=node.innerText.trim(); markDirty(); });
+        node.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); node.blur(); } });
+        node.addEventListener("blur",()=>buildJump());
+      }
+      if(!c.sub) { sb.textContent="+ subtitle"; sb.addEventListener("focus",()=>{ if(!c.sub) sb.textContent=""; },{once:true}); }
+      const del=el("button","ctx-del","Delete context"); del.type="button";
+      del.onclick=()=>{ if(del.dataset.armed){ data.contexts.splice(ci,1); changed(); buildJump(); } else { del.dataset.armed="1"; del.textContent="Click again to delete"; } };
+      lab.appendChild(del);
+    }
+    f.appendChild(lab);
+    c.cols.forEach((col,coli)=>{
+      const d=el("div","col"); let n=0;
+      col.forEach((note,ni)=>{ if(!visible(note.t)) return; n++; d.appendChild(noteEl(note,ci,coli,ni)); });
+      if(!n) d.classList.add("empty");
+      if(ui.editing){
+        const foot=el("div","colfoot");
+        const add=el("button",null,"+ note"); add.type="button"; add.title="Add a note to this column";
+        add.onclick=()=>{ col.push({t: ui.view==="big" ? "event":"event", x:"New note"}); changed(); focusLast(ci,coli); };
+        const addc=el("button",null,"+ column →"); addc.type="button"; addc.title="Insert an empty column to the right";
+        addc.onclick=()=>{ c.cols.splice(coli+1,0,[]); changed(); };
+        foot.append(add,addc);
+        if(!col.length){ const rc=el("button",null,"remove"); rc.type="button"; rc.title="Remove this empty column"; rc.onclick=()=>{ c.cols.splice(coli,1); if(!c.cols.length) c.cols.push([]); changed(); }; foot.appendChild(rc); }
+        d.appendChild(foot);
+      }
+      f.appendChild(d);
+    });
+    track.appendChild(f);
+  });
+  if(ui.editing){
+    const ac=el("button","addctx","+ bounded context"); ac.type="button";
+    ac.onclick=()=>{ data.contexts.push({id:uid(),name:"New context",sub:"",cols:[[]]}); changed(); buildJump(); };
+    track.appendChild(ac);
+  }
+  renderHot();
+}
+function focusLast(ci,coli){
+  const f=$("track").children[ci]; if(!f) return;
+  const col=f.querySelectorAll(".col")[coli]; if(!col) return;
+  const xs=col.querySelectorAll(".x"); const x=xs[xs.length-1]; if(!x) return;
+  x.focus(); const r=document.createRange(); r.selectNodeContents(x); const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+}
+
+function renderHot(){
+  const ul=$("hotlist"); ul.innerHTML=""; let i=1;
+  for(const c of data.contexts) for(const col of c.cols) for(const n of col) if(n.t==="hot" && n.x){
+    const li=el("li"); li.appendChild(el("span","tag","H"+(i++)));
+    const p=el("p",null,n.x); p.appendChild(el("span","where",c.name)); li.appendChild(p); ul.appendChild(li);
+  }
+  if(i===1) ul.appendChild(el("li",null,"No hotspots on the board."));
+}
+function buildLegend(){
+  const lg=$("legend");
+  for(const [t,v] of Object.entries(TYPES)){
+    const b=el("button","chip"); b.type="button"; b.setAttribute("aria-pressed","true");
+    const sw=el("i"); sw.style.background=`var(--n-${t})`; b.append(sw, v.label);
+    b.onclick=()=>{ ui.hidden.has(t)?ui.hidden.delete(t):ui.hidden.add(t); b.setAttribute("aria-pressed", String(!ui.hidden.has(t))); render(); };
+    lg.appendChild(b);
+  }
+}
+function buildJump(){
+  const j=$("jump"), board=$("board"); j.innerHTML="";
+  data.contexts.forEach(c=>{
+    const a=el("a",null,c.name||"Untitled"); a.href="#";
+    a.onclick=e=>{ e.preventDefault(); const t=$("ctx-"+c.id); if(t) board.scrollLeft=t.offsetLeft-20; };
+    j.appendChild(a);
+  });
+}
+function setView(v){
+  ui.view=v;
+  $("v-big").setAttribute("aria-pressed", String(v==="big"));
+  $("v-detail").setAttribute("aria-pressed", String(v==="detail"));
+  render();
+}
+function setEditing(on){
+  ui.editing=on;
+  $("edit-toggle").textContent = on ? "Done editing" : "Edit board";
+  $("save").hidden = !on; $("discard").hidden = !on;
+  $("hint").textContent = on
+    ? "Click a note to change its text · hover a note for type, pivotal ★, move and delete · column buttons add notes and columns"
+    : "Scroll sideways along the timeline · pivotal events have a heavy outline · red notes are hotspots";
+  if(on && ui.view==="big") setView("detail"); else render();
+  status();
+}
+
+function buildDocument(){
+  const json = JSON.stringify(data, null, 1).replace(/</g,"\\u003c");
+  const body = pageSource.replace(/(<script type="application\/json" id="board-data">)[\s\S]*?(<\/script>)/, (m,a,b)=>a+json+b);
+  return SKELETON + body + "</body></html>";
+}
+
+async function save(){
+  if(!ui.dirty || ui.busy) return;
+  ui.busy=true; status("Saving…");
+  try{
+    const artifact = window.claude && window.claude.use ? await window.claude.use("artifact") : null;
+    if(!artifact){ ui.busy=false; status("Saving isn't available in this view. Open the page on claude.ai while signed in.", true); return; }
+    await artifact.publish(buildDocument());
+    saved = JSON.stringify(data); ui.dirty=false; ui.busy=false; status("Saved. The page reloads with your changes.");
+  }catch(err){
+    ui.busy=false;
+    const code = err && err.code;
+    if(code==="conflict") status("Someone else saved first. The page reloads with their version.", true);
+    else if(code==="not_writer"||code==="not_granted") status("You can edit here, but only people with edit access can save.", true);
+    else status("Couldn't save" + (code?` (${code})`:"") + ". Try again.", true);
+  }
+}
+
+function init(){
+  const b=document.body.innerHTML, s=b.indexOf("<title>"), e=b.indexOf("<!--/page-->");
+  pageSource = s>=0 && e>s ? b.slice(s, e+"<!--/page-->".length) : b;
+  data = loadData(); saved = JSON.stringify(data);
+  buildLegend(); buildJump(); render(); status();
+  $("v-big").onclick=()=>setView("big");
+  $("v-detail").onclick=()=>setView("detail");
+  $("edit-toggle").onclick=()=>setEditing(!ui.editing);
+  $("save").onclick=save;
+  $("discard").onclick=()=>{ data=JSON.parse(saved); ui.dirty=false; render(); buildJump(); status("Changes discarded."); };
+  window.addEventListener("beforeunload", e=>{ if(ui.dirty && !ui.busy){ e.preventDefault(); e.returnValue=""; } });
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+<!--/page-->
