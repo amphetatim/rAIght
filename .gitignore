@@ -28,3 +28,7 @@ venv/
 !.vscode/extensions.json
 .idea/
 *.swp
+
+# Claude Code – personal files (shared setup in CLAUDE.md and .claude/ IS committed)
+CLAUDE.local.md
+.claude/settings.local.json
