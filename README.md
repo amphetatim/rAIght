@@ -26,14 +26,18 @@ rAIght gives the process owner three things:
 ```
 rAIght/
 ├── README.md                  ← you are here
+├── TEAM.md                    ← who does what (roles, GitHub handles)
 ├── CONTRIBUTING.md            ← how we work together (branches, PRs, issues)
+├── CLAUDE.md                  ← shared context for Claude Code (+ .claude/)
 ├── app/                       ← implementation (IS 613) – stack not decided yet
 ├── docs/
 │   ├── concept/               ← the full concept from IS 615, as Markdown
+│   ├── technical/             ← architecture, data model, API, coding conventions
 │   ├── decisions/             ← architecture & design decision records (ADRs)
+│   ├── handbook/              ← how and why our setup works – read when unclear
 │   ├── presentations/         ← our decks (.pptx) – see its README for which are current
 │   └── eventstorming-board/   ← interactive EventStorming board (HTML, partly outdated)
-└── .github/                   ← issue and pull request templates
+└── .github/                   ← issue/PR templates, CODEOWNERS
 ```
 
 ## Concept documents
@@ -53,15 +57,18 @@ rAIght/
 ## Status
 
 - [x] Concept (IS 615) – done, pitched on 2 Oct 2026
-- [ ] Team organisation and roles for IS 613
+- [x] Team organisation and roles for IS 613 ([TEAM.md](TEAM.md))
+- [x] Shared Claude Code setup ([handbook](docs/handbook/02-claude-setup.md))
+- [ ] `main` protected (pending GitHub Pro)
 - [ ] Technology stack decided ([app/README.md](app/README.md))
 - [ ] Release 1 (walking skeleton) – see the **R1** milestone in Issues
 
 ## Getting started as a team member
 
 1. Accept the collaborator invitation for this repository.
-2. Read this README, [CONTRIBUTING.md](CONTRIBUTING.md) and the [user story map](docs/concept/06-user-story-map.md).
-3. Pick an issue from the current milestone, assign yourself, and work on a branch.
+2. Read this README, [TEAM.md](TEAM.md), [CONTRIBUTING.md](CONTRIBUTING.md) and the [user story map](docs/concept/06-user-story-map.md).
+3. Developers: set up Claude Code as in [handbook 02](docs/handbook/02-claude-setup.md#first-time-setup-per-developer).
+4. Pick an issue from the current milestone, assign yourself, and work on a branch.
 
 ## Note on course material
 

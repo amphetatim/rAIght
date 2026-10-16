@@ -1,0 +1,33 @@
+# Code owners are requested for review automatically when a PR touches their paths.
+# The LAST matching pattern wins. Explained in docs/handbook/04-git-and-github.md.
+# Protected-file list must match CLAUDE.md rule 1 and .claude/hooks/protect-structure.sh.
+# Structure maintained by @Venson101.
+
+# Default: tech lead + repo structure
+*                         @amphetatim @Venson101
+
+# --- Code (planned layout – adjust after the stack ADR) ---
+/app/frontend/            @aluschek @Venson101
+/app/backend/             @ebu2000 @Ivangb-626
+/app/analysis/            @KyoungmiKwon @Ivangb-626
+
+# --- Docs ---
+/docs/concept/            @lulu122002 @amphetatim
+/docs/technical/          @amphetatim @Venson101
+/docs/technical/api.md    @ebu2000 @aluschek @amphetatim
+/docs/technical/data-model.md  @ebu2000 @Ivangb-626 @KyoungmiKwon @amphetatim
+/docs/decisions/          @amphetatim @Venson101 @lulu122002
+/docs/handbook/           @amphetatim @Venson101
+/docs/presentations/      @tinjanyberg @22jj02 @lulu122002
+
+# --- Structural files (protected – see CLAUDE.md rule 1) ---
+CLAUDE.md                 @amphetatim @Venson101
+/.claude/                 @amphetatim @Venson101
+/.github/                 @Venson101 @amphetatim
+/TEAM.md                  @amphetatim @lulu122002
+/CONTRIBUTING.md          @amphetatim @Venson101
+/README.md                @amphetatim @Venson101
+/.gitignore               @Venson101 @amphetatim
+package.json              @amphetatim @Venson101
+pyproject.toml            @amphetatim @Venson101 @KyoungmiKwon
+requirements*.txt         @amphetatim @Venson101 @KyoungmiKwon
