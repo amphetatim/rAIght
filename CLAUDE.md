@@ -9,6 +9,7 @@ Team **Scrumsterz**, University of Mannheim. IS 615 = concept (done), IS 613 = i
 - **Persona:** Lena, Recruiting Operations Lead at SAP HR. She builds her own automations; there is **no AI developer in the loop** ([ADR 0001](docs/decisions/0001-process-owner-owns-the-lifecycle.md)).
 - **Parts:** Learn (ladder + triage training) → Build (Lena applies triage, notes an *agent reason*) → Monitor (dashboard on run logs) → Convert (uniform agents → workflows).
 - **Monitoring uses plain statistics on run logs, never AI** ([ADR 0002](docs/decisions/0002-no-ai-to-check-ai.md)). Don't add model calls to the metrics.
+- **Demo-first** ([ADR 0004](docs/decisions/0004-demo-first-scope.md)): we build a demo, not a production system. External SAP systems are **named but mocked** via one adapter layer; APIs are defined but implemented only as far as the demo needs; no auth, real persistence, scaling or production hardening. **Metrics are computed for real** on mock data. The [demo script](docs/technical/demo-script.md) is the scope boundary: **don't build what it doesn't show**.
 - **Current scope: Release 1 (walking skeleton)** – see [user story map](docs/concept/06-user-story-map.md). Don't build R2/R3 features unless the issue says so.
 - Use the terms from the [glossary](docs/concept/09-glossary.md) in code, UI and docs (e.g. `same_path_share`, `agent_reason`, `uniform agent`).
 
@@ -33,7 +34,7 @@ _TBD once the stack is decided_ – install, run, test, lint, format.
 |---|---|---|
 | `app/` | Implementation – has its own `CLAUDE.md` | Working on code |
 | `docs/concept/` | Concept from IS 615 (source of truth for *what* we build) | Unsure about a feature's intent |
-| `docs/technical/` | Architecture, data model, API, coding conventions | Before changing structure, data or endpoints |
+| `docs/technical/` | Architecture, data model, API, coding conventions, **demo script** | Before changing structure, data or endpoints; demo script when unsure if something is in scope |
 | `docs/decisions/` | ADRs | Before reopening a settled question |
 | `docs/handbook/` | **Human documentation only** – see rule below | Only when updating it, or when explicitly asked |
 | `TEAM.md`, `CONTRIBUTING.md` | Roles, ways of working, git rules | Questions about who/how |

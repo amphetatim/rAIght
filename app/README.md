@@ -1,6 +1,6 @@
 # app/ – implementation (IS 613)
 
-The code for rAIght lives here. **The technology stack is not decided yet.** Wait for the IS 613 requirements and record the decision as an ADR in [`docs/decisions/`](../docs/decisions/).
+The code for rAIght lives here. We build a **demo**, not a production system: external systems are mocked, metrics are real, and the [demo script](../docs/technical/demo-script.md) defines the scope ([ADR 0004](../docs/decisions/0004-demo-first-scope.md)). **The technology stack is not decided yet.** Wait for the IS 613 requirements and record the decision as an ADR in [`docs/decisions/`](../docs/decisions/).
 
 ## What Release 1 needs technically
 
@@ -20,6 +20,6 @@ For a course prototype, the run logs can be **simulated** with realistic sample 
 
 1. Is a stack prescribed (e.g. SAP BTP with CAP and SAPUI5/Fiori), or is it free?
 2. Where does it run – locally only, or deployed to a cloud account the course provides?
-3. Real or simulated run logs?
+3. ~~Real or simulated run logs?~~ → simulated ([ADR 0004](../docs/decisions/0004-demo-first-scope.md))
 
 Until then, please don't add a framework here – it is easy to start, hard to undo.

@@ -19,7 +19,7 @@ rAIght/
 │   └── analysis/  (planned)   # + own CLAUDE.md
 ├── docs/
 │   ├── concept/               # WHAT and WHY – concept from IS 615 (source of truth)
-│   ├── technical/             # HOW – architecture, data model, API, conventions
+│   ├── technical/             # HOW – architecture, data model, API, conventions, demo script
 │   ├── decisions/             # ADRs – decisions that affect the whole team
 │   ├── handbook/              # this – explanations for humans, not loaded by Claude
 │   ├── presentations/         # decks (.pptx)
@@ -40,10 +40,12 @@ rAIght/
 | `docs/decisions/` | Everyone | On demand, to avoid reopening settled questions |
 | `docs/handbook/` | Humans | No (only the mapping table, during structural changes) |
 
+**Demo script = scope boundary:** we build a demo, not a production system ([ADR 0004](../decisions/0004-demo-first-scope.md)). `docs/technical/demo-script.md` lists exactly what the demo shows; anything not in it isn't built. When a feature request comes up, check it against the script first.
+
 **Concept vs. technical:** `concept/` says what the product must do; `technical/` says how we build it. If they disagree about *what*, the concept wins; change it deliberately (structural change) rather than letting code drift.
 
 ## Adding a new folder
 
 A new top-level folder or a new `app/` sub-folder is a structural change: add it here, to the tree in [`README.md`](../../README.md), and – for code folders – a `CLAUDE.md` and a `CODEOWNERS` line.
 
-_Last updated: 2026-10-16_
+_Last updated: 2026-10-18_

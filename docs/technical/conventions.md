@@ -37,9 +37,12 @@ How we write and review code. Applies to everyone – and to Claude. Tool-specif
 
 ## 4. Tests
 
-- New logic → tests in the same PR.
-- Bug fix → a test that fails without the fix.
-- Metrics (same-path share, token sums) are pure functions → easy to unit-test; test them with small, hand-made run logs.
+We build a demo ([ADR 0004](../decisions/0004-demo-first-scope.md)), so tests are targeted, not exhaustive:
+
+- **Metrics** (same-path share, token sums, unused detection) and the **triage logic** → unit tests, always. They're pure functions; test them with small, hand-made run logs.
+- Bug fix in that logic → a test that fails without the fix.
+- **Everything else** (UI, mock adapters, API plumbing) → checked by running the [demo script](demo-script.md) end to end before merging to `main`.
+- No production hardening (auth, retries, load) – out of scope.
 - CI must be green before merge (once CI exists).
 
 ## 5. Formatting and linting
