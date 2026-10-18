@@ -34,7 +34,7 @@ _TBD once the stack is decided_ – install, run, test, lint, format.
 |---|---|---|
 | `app/` | Implementation – has its own `CLAUDE.md` | Working on code |
 | `docs/concept/` | Concept from IS 615 (source of truth for *what* we build) | Unsure about a feature's intent |
-| `docs/technical/` | Architecture, data model, API, coding conventions, **demo script** | Before changing structure, data or endpoints; demo script when unsure if something is in scope |
+| `docs/technical/` | Architecture, data model, API, coding conventions, **demo script**, **design system** | Before changing structure, data or endpoints; demo script when unsure if something is in scope; design system before any UI work |
 | `docs/decisions/` | ADRs | Before reopening a settled question |
 | `docs/handbook/` | **Human documentation only** – see rule below | Only when updating it, or when explicitly asked |
 | `TEAM.md`, `CONTRIBUTING.md` | Roles, ways of working, git rules | Questions about who/how |

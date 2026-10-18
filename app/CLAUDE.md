@@ -25,4 +25,5 @@ Each folder gets its own `CLAUDE.md` once it exists (structural change → confi
 - **Metrics are deterministic statistics** (counts, shares, sums) – no model calls ([ADR 0002](../docs/decisions/0002-no-ai-to-check-ai.md)).
 - **Mock data only.** Run logs are simulated (fixtures must match the demo script's data requirements). No real personal data.
 - **Metrics must be real calculations** on that data. Never hard-code a metric result to make the demo look right; fix the fixtures instead.
+- **All UI follows [docs/technical/design-system.md](../docs/technical/design-system.md)** (derived from the pitch deck; slide 3 is the dashboard reference). Use its tokens, never hard-coded colours, and no characters/logos it forbids.
 - Use glossary names in code: `agent_reason`, `same_path_share`, `run_log`, `ladder_step`, `uniform_agent`.
