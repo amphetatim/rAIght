@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from datetime import datetime
 from pathlib import Path
 import json
 from typing import Any
@@ -132,3 +133,25 @@ def validate_issue19_coverage(
         )
 
     return errors
+
+
+def _parse_iso8601_utc(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def compute_unused_agents(
+    agent_ids: set[str], records: list[dict[str, Any]], period_start: datetime | None = None
+) -> list[str]:
+    active_agents: set[str] = set()
+
+    for record in records:
+        agent_id = str(record["agent_id"])
+        if period_start is None:
+            active_agents.add(agent_id)
+            continue
+
+        started_at = _parse_iso8601_utc(str(record["started_at"]))
+        if started_at >= period_start:
+            active_agents.add(agent_id)
+
+    return sorted(agent_ids - active_agents)

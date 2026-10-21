@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
 import unittest
 
 from app.run_log_analysis import (
+    EXPECTED_AGENT_IDS,
+    compute_unused_agents,
     compute_same_path_share_per_agent,
     compute_total_tokens_per_agent,
     load_run_logs,
@@ -40,6 +43,16 @@ class RunLogAnalysisTest(unittest.TestCase):
         self.assertEqual(shares["agent_offer_letters"], 0.8)
         self.assertEqual(shares["agent_document_check"], 0.6)
         self.assertEqual(shares["agent_interview_scheduling"], 0.6)
+
+    def test_compute_unused_agents_without_period(self) -> None:
+        self.assertEqual(compute_unused_agents(EXPECTED_AGENT_IDS, self.records), [])
+
+    def test_compute_unused_agents_with_period(self) -> None:
+        cutoff = datetime(2026, 10, 20, 10, 15, tzinfo=timezone.utc)
+        self.assertEqual(
+            compute_unused_agents(EXPECTED_AGENT_IDS, self.records, period_start=cutoff),
+            ["agent_application_status"],
+        )
 
 
 if __name__ == "__main__":
