@@ -1,0 +1,275 @@
+[
+  {
+    "id": "run_0001",
+    "agent_id": "agent_application_status",
+    "started_at": "2026-10-20T08:00:00Z",
+    "tokens_in": 810,
+    "tokens_out": 190,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "fetch_application_status" },
+      { "order": 3, "tool": "send_status_update" }
+    ]
+  },
+  {
+    "id": "run_0002",
+    "agent_id": "agent_application_status",
+    "started_at": "2026-10-20T08:15:00Z",
+    "tokens_in": 790,
+    "tokens_out": 180,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "fetch_application_status" },
+      { "order": 3, "tool": "send_status_update" }
+    ]
+  },
+  {
+    "id": "run_0003",
+    "agent_id": "agent_application_status",
+    "started_at": "2026-10-20T09:00:00Z",
+    "tokens_in": 820,
+    "tokens_out": 200,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "fetch_application_status" },
+      { "order": 3, "tool": "send_status_update" }
+    ]
+  },
+  {
+    "id": "run_0004",
+    "agent_id": "agent_application_status",
+    "started_at": "2026-10-20T09:30:00Z",
+    "tokens_in": 805,
+    "tokens_out": 175,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "fetch_application_status" },
+      { "order": 3, "tool": "send_status_update" }
+    ]
+  },
+  {
+    "id": "run_0005",
+    "agent_id": "agent_application_status",
+    "started_at": "2026-10-20T10:10:00Z",
+    "tokens_in": 870,
+    "tokens_out": 240,
+    "outcome": "escalated",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "fetch_application_status" },
+      { "order": 3, "tool": "check_case_notes" },
+      { "order": 4, "tool": "route_to_recruiter" }
+    ]
+  },
+  {
+    "id": "run_0006",
+    "agent_id": "agent_document_check",
+    "started_at": "2026-10-20T08:05:00Z",
+    "tokens_in": 1240,
+    "tokens_out": 320,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_candidate_package" },
+      { "order": 2, "tool": "verify_required_documents" },
+      { "order": 3, "tool": "send_completion_notice" }
+    ]
+  },
+  {
+    "id": "run_0007",
+    "agent_id": "agent_document_check",
+    "started_at": "2026-10-20T08:35:00Z",
+    "tokens_in": 1310,
+    "tokens_out": 380,
+    "outcome": "escalated",
+    "steps": [
+      { "order": 1, "tool": "read_candidate_package" },
+      { "order": 2, "tool": "verify_required_documents" },
+      { "order": 3, "tool": "request_missing_document" },
+      { "order": 4, "tool": "route_to_recruiter" }
+    ]
+  },
+  {
+    "id": "run_0008",
+    "agent_id": "agent_document_check",
+    "started_at": "2026-10-20T09:10:00Z",
+    "tokens_in": 1180,
+    "tokens_out": 290,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_candidate_package" },
+      { "order": 2, "tool": "verify_required_documents" },
+      { "order": 3, "tool": "send_completion_notice" }
+    ]
+  },
+  {
+    "id": "run_0009",
+    "agent_id": "agent_document_check",
+    "started_at": "2026-10-20T09:45:00Z",
+    "tokens_in": 1400,
+    "tokens_out": 450,
+    "outcome": "failed",
+    "steps": [
+      { "order": 1, "tool": "read_candidate_package" },
+      { "order": 2, "tool": "verify_required_documents" },
+      { "order": 3, "tool": "check_id_validity" },
+      { "order": 4, "tool": "raise_manual_review" }
+    ]
+  },
+  {
+    "id": "run_0010",
+    "agent_id": "agent_document_check",
+    "started_at": "2026-10-20T10:20:00Z",
+    "tokens_in": 1225,
+    "tokens_out": 305,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_candidate_package" },
+      { "order": 2, "tool": "verify_required_documents" },
+      { "order": 3, "tool": "send_completion_notice" }
+    ]
+  },
+  {
+    "id": "run_0011",
+    "agent_id": "agent_offer_letters",
+    "started_at": "2026-10-20T08:20:00Z",
+    "tokens_in": 1580,
+    "tokens_out": 530,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_offer_request" },
+      { "order": 2, "tool": "fetch_offer_template" },
+      { "order": 3, "tool": "populate_offer_fields" },
+      { "order": 4, "tool": "send_offer_letter" }
+    ]
+  },
+  {
+    "id": "run_0012",
+    "agent_id": "agent_offer_letters",
+    "started_at": "2026-10-20T08:50:00Z",
+    "tokens_in": 1610,
+    "tokens_out": 560,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_offer_request" },
+      { "order": 2, "tool": "fetch_offer_template" },
+      { "order": 3, "tool": "populate_offer_fields" },
+      { "order": 4, "tool": "send_offer_letter" }
+    ]
+  },
+  {
+    "id": "run_0013",
+    "agent_id": "agent_offer_letters",
+    "started_at": "2026-10-20T09:25:00Z",
+    "tokens_in": 1550,
+    "tokens_out": 500,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_offer_request" },
+      { "order": 2, "tool": "fetch_offer_template" },
+      { "order": 3, "tool": "populate_offer_fields" },
+      { "order": 4, "tool": "send_offer_letter" }
+    ]
+  },
+  {
+    "id": "run_0014",
+    "agent_id": "agent_offer_letters",
+    "started_at": "2026-10-20T10:05:00Z",
+    "tokens_in": 1605,
+    "tokens_out": 540,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_offer_request" },
+      { "order": 2, "tool": "fetch_offer_template" },
+      { "order": 3, "tool": "populate_offer_fields" },
+      { "order": 4, "tool": "send_offer_letter" }
+    ]
+  },
+  {
+    "id": "run_0015",
+    "agent_id": "agent_offer_letters",
+    "started_at": "2026-10-20T10:40:00Z",
+    "tokens_in": 1680,
+    "tokens_out": 590,
+    "outcome": "escalated",
+    "steps": [
+      { "order": 1, "tool": "read_offer_request" },
+      { "order": 2, "tool": "fetch_offer_template" },
+      { "order": 3, "tool": "validate_compensation_band" },
+      { "order": 4, "tool": "route_to_recruiter" }
+    ]
+  },
+  {
+    "id": "run_0016",
+    "agent_id": "agent_interview_scheduling",
+    "started_at": "2026-10-20T08:10:00Z",
+    "tokens_in": 1760,
+    "tokens_out": 410,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "check_interviewer_availability" },
+      { "order": 3, "tool": "propose_slots" },
+      { "order": 4, "tool": "send_invite" }
+    ]
+  },
+  {
+    "id": "run_0017",
+    "agent_id": "agent_interview_scheduling",
+    "started_at": "2026-10-20T08:40:00Z",
+    "tokens_in": 1850,
+    "tokens_out": 460,
+    "outcome": "escalated",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "check_interviewer_availability" },
+      { "order": 3, "tool": "request_more_slots" },
+      { "order": 4, "tool": "route_to_recruiter" }
+    ]
+  },
+  {
+    "id": "run_0018",
+    "agent_id": "agent_interview_scheduling",
+    "started_at": "2026-10-20T09:20:00Z",
+    "tokens_in": 1690,
+    "tokens_out": 390,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "check_interviewer_availability" },
+      { "order": 3, "tool": "propose_slots" },
+      { "order": 4, "tool": "send_invite" }
+    ]
+  },
+  {
+    "id": "run_0019",
+    "agent_id": "agent_interview_scheduling",
+    "started_at": "2026-10-20T09:55:00Z",
+    "tokens_in": 1920,
+    "tokens_out": 510,
+    "outcome": "failed",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "check_interviewer_availability" },
+      { "order": 3, "tool": "detect_time_zone_conflict" },
+      { "order": 4, "tool": "raise_manual_review" }
+    ]
+  },
+  {
+    "id": "run_0020",
+    "agent_id": "agent_interview_scheduling",
+    "started_at": "2026-10-20T10:30:00Z",
+    "tokens_in": 1810,
+    "tokens_out": 430,
+    "outcome": "success",
+    "steps": [
+      { "order": 1, "tool": "read_request" },
+      { "order": 2, "tool": "check_interviewer_availability" },
+      { "order": 3, "tool": "propose_slots" },
+      { "order": 4, "tool": "send_invite" }
+    ]
+  }
+]
