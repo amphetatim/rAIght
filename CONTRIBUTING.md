@@ -1,6 +1,6 @@
 # How we work together
 
-Simple rules so nine people can work in one repository without getting in each other's way. Change them together when they stop helping.
+Simple rules so eight people can work in one repository without getting in each other's way. Change them together when they stop helping.
 
 ## 1. Work starts with an issue
 

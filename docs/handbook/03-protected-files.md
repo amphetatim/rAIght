@@ -8,7 +8,7 @@
 |---|---|---|
 | 1. Instruction | `CLAUDE.md`, rule 1 | Soft – Claude follows it, but it's text |
 | 2. Hook | `.claude/hooks/protect-structure.sh`, registered in `.claude/settings.json` | Enforced locally – Claude Code shows a confirmation prompt with the warning |
-| 3. Review | `.github/CODEOWNERS` + ruleset "Require review from Code Owners" | Enforced on GitHub – the change can't reach `main` without Tim's or Wenxuan's approval. ⚠️ Needs branch protection, see [04](04-git-and-github.md) |
+| 3. Review | `.github/CODEOWNERS` + ruleset "Require review from Code Owners" | Enforced on GitHub – the change can't reach `main` without approval from a Tech Lead (Ebubekir or Wenxuan) or Tim. ⚠️ Needs branch protection, see [04](04-git-and-github.md) |
 
 ## Which files are protected
 
@@ -59,4 +59,4 @@ echo '{"tool_name":"Edit","tool_input":{"file_path":"'"$PWD"'/CLAUDE.md"}}' \
 # → prints JSON with "permissionDecision":"ask"
 ```
 
-_Last updated: 2026-10-16_
+_Last updated: 2026-10-23_

@@ -3,8 +3,8 @@
 # Protected-file list must match CLAUDE.md rule 1 and .claude/hooks/protect-structure.sh.
 # Structure maintained by @Venson101.
 
-# Default: tech lead + repo structure
-*                         @amphetatim @Venson101
+# Default: Tech Leads (Ebubekir, Wenxuan)
+*                         @ebu2000 @Venson101
 
 # --- Code (planned layout – adjust after the stack ADR) ---
 /app/frontend/            @aluschek @Venson101
@@ -12,22 +12,22 @@
 /app/analysis/            @KyoungmiKwon @Ivangb-626
 
 # --- Docs ---
-/docs/concept/            @lulu122002 @amphetatim
-/docs/technical/          @amphetatim @Venson101
-/docs/technical/api.md    @ebu2000 @aluschek @amphetatim
-/docs/technical/data-model.md  @ebu2000 @Ivangb-626 @KyoungmiKwon @amphetatim
-/docs/decisions/          @amphetatim @Venson101 @lulu122002
-/docs/handbook/           @amphetatim @Venson101
-/docs/presentations/      @tinjanyberg @22jj02 @lulu122002
+/docs/concept/            @amphetatim @ebu2000 @Venson101
+/docs/technical/          @ebu2000 @Venson101
+/docs/technical/api.md    @ebu2000 @aluschek @Venson101
+/docs/technical/data-model.md  @ebu2000 @Ivangb-626 @KyoungmiKwon
+/docs/decisions/          @ebu2000 @Venson101 @amphetatim
+/docs/handbook/           @Venson101 @ebu2000 @amphetatim
+/docs/presentations/      @tinjanyberg @22jj02 @amphetatim
 
 # --- Structural files (protected – see CLAUDE.md rule 1) ---
-CLAUDE.md                 @amphetatim @Venson101
-/.claude/                 @amphetatim @Venson101
-/.github/                 @Venson101 @amphetatim
-/TEAM.md                  @amphetatim @lulu122002
-/CONTRIBUTING.md          @amphetatim @Venson101
-/README.md                @amphetatim @Venson101
-/.gitignore               @Venson101 @amphetatim
-package.json              @amphetatim @Venson101
-pyproject.toml            @amphetatim @Venson101 @KyoungmiKwon
-requirements*.txt         @amphetatim @Venson101 @KyoungmiKwon
+CLAUDE.md                 @Venson101 @ebu2000 @amphetatim
+/.claude/                 @Venson101 @ebu2000 @amphetatim
+/.github/                 @Venson101 @ebu2000 @amphetatim
+/TEAM.md                  @amphetatim @Venson101 @ebu2000
+/CONTRIBUTING.md          @Venson101 @ebu2000 @amphetatim
+/README.md                @amphetatim @Venson101 @ebu2000
+/.gitignore               @Venson101 @ebu2000
+package.json              @Venson101 @ebu2000
+pyproject.toml            @ebu2000 @Venson101 @KyoungmiKwon
+requirements*.txt         @ebu2000 @Venson101 @KyoungmiKwon
