@@ -1,7 +1,7 @@
 # rAIght
 
 > **Not more AI, but rAIght.**
-> A toolkit that helps SAP process owners build every automation on the lowest step that does the job – and turn agents that keep repeating themselves into lean workflows on their own.
+> A toolkit that helps process owners build every AI automation on the lowest step that does the job – and turn agents that keep repeating themselves into lean workflows on their own.
 
 Team project by **Scrumsterz** – University of Mannheim, IS 615 *Enterprise Cloud Design & Development* (concept) and IS 613 (implementation).
 
@@ -9,7 +9,7 @@ Team project by **Scrumsterz** – University of Mannheim, IS 615 *Enterprise Cl
 
 ## The idea in 30 seconds
 
-SAP wants to become an **Autonomous Enterprise** and, at the same time, cut its value-chain emissions by at least 90% by 2030. Every AI agent plans, calls tools and retries, so it needs far more compute than a fixed workflow. Process owners build their own automations and tend to reach for an agent by default – nobody checks whether it still needs to be one.
+SAP employees build more and more AI automations themselves, with external tools like **Copilot Studio, Power Automate, OpenAI and n8n**. Every agent plans, calls tools and retries, so it costs far more tokens – and CO₂ – than a fixed workflow, and nobody checks whether it still needs to be an agent. SAP's **CIO office** asked a taskforce (us) to cut those costs and emissions without slowing adoption. rAIght is the answer: first internal, later migrated into the SAP stack and offered to customers ([ADR 0005](docs/decisions/0005-scope-external-agents.md)).
 
 rAIght gives the process owner three things:
 
@@ -21,7 +21,7 @@ rAIght gives the process owner three things:
 
 **The process owner owns the whole lifecycle.** There is no separate AI developer in the loop (see [ADR 0001](docs/decisions/0001-process-owner-owns-the-lifecycle.md)).
 
-**Scope of the implementation:** a demo along a defined [demo script](docs/technical/demo-script.md). SAP systems are named but mocked, the metrics are computed for real ([ADR 0004](docs/decisions/0004-demo-first-scope.md)).
+**Scope of the implementation:** a demo along a defined [demo script](docs/technical/demo-script.md). External providers are named but mocked, the metrics are computed for real ([ADR 0004](docs/decisions/0004-demo-first-scope.md)).
 
 ## Repository structure
 

@@ -10,8 +10,10 @@ Terms follow the [glossary](../concept/09-glossary.md).
 
 | Field | Type | Note |
 |---|---|---|
-| `id` | string | |
+| `id` | string | rAIght's own ID |
 | `name` | string | e.g. "Interview scheduling agent" |
+| `provider` | enum | `copilot_studio`, `power_automate`, `openai`, `n8n` ([ADR 0005](../decisions/0005-scope-external-agents.md)) |
+| `provider_agent_id` | string | The agent's/flow's ID in the provider |
 | `owner` | string | Process owner (mock name) |
 | `purpose` | string | One line |
 | `ladder_step` | enum | `rule`, `workflow`, `classic_ml`, `genai_call`, `agent`, `multi_agent` |
@@ -21,7 +23,7 @@ Terms follow the [glossary](../concept/09-glossary.md).
 
 ### Run log
 
-One record per run of an automation.
+One record per run of an automation, **normalised**: every source adapter converts its provider's log format into this schema, so metrics never depend on the provider.
 
 | Field | Type | Note |
 |---|---|---|
