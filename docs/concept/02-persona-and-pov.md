@@ -7,7 +7,7 @@
 > "I built agents for everything. Nobody tells me whether they still need to be agents."
 
 - Runs high-volume recruiting admin: application status updates, document checks, interview scheduling, offer letters
-- **Builds her own automations** on SAP's low-code platform – agents included
+- **Builds her own automations** with the tools she already has – Microsoft Copilot Studio, Power Automate, n8n – agents included
 - Was trained on the tool, never on when to use which step
 - **Owns her automations end to end** – nobody else reviews them
 
@@ -20,9 +20,9 @@
 
 ## Customer vs user
 
-- **Customer:** the SAP **CIO office** – owns the Autonomous Enterprise and sponsors rAIght
+- **Customer:** the SAP **CIO office** – owns AI tool licences, IT spend and AI governance; commissioned the taskforce that built rAIght
 - **User:** **process owners** like Lena – their behaviour rAIght has to change
-- **Stakeholder:** the sustainability office
+- **Stakeholder:** the sustainability office (needs the CO₂ figures for reporting)
 
 ## Point of view
 

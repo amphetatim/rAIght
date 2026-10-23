@@ -14,17 +14,17 @@
 
 | | |
 |---|---|
-| **Who** | Process owners who build their own automations – first Lena in HR recruiting. Sponsored by the CIO office. |
+| **Who** | Process owners who build their own automations with external tools – first Lena in HR recruiting. Commissioned by the CIO office. |
 | **What** | Ladder & triage training · dashboard with tokens, path similarity and suggestions · guided conversion · retiring unused agents |
-| **Where** | Inside the low-code platform Lena already builds with – no extra tool to open |
-| **When** | Release 1: training + dashboard · Release 2: guided conversion · Release 3: carbon budgets, SAP-wide |
+| **Where** | Across the tools Lena already builds with – Copilot Studio, Power Automate, OpenAI, n8n – in one view |
+| **When** | Release 1: training + dashboard · Release 2: guided conversion · Release 3: carbon budgets, SAP-wide · Then: migration into the SAP stack and offering for customers |
 | **Why rAIght** | Monitoring tools show usage. rAIght also tells Lena what to change – and helps her do it herself. |
 
 ## Ingredients
 
 | | |
 |---|---|
-| Existing run logs | 100% |
+| Existing provider run logs | 100% |
 | Extra AI to check the AI | 0% |
-| Low-code platform | already in use |
+| Copilot Studio, Power Automate, OpenAI, n8n | already in use |
 | Data protection & works council sign-off | required |

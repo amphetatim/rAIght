@@ -10,7 +10,9 @@ Use these terms consistently – in docs, issues, code and the UI.
 | **Triage** | Short decision tree the process owner learns in training and applies herself while building. Its result is the ladder step. |
 | **Agent reason** | One-line justification recorded when the process owner chooses an agent. |
 | **Agent inventory** | Register of all automations and agents with owner and purpose, including those built before rAIght. The basis for monitoring. |
-| **Run log** | Record of one run of an automation: tokens, steps (tool calls), output. |
+| **Provider** | External tool an automation is built and run in: Copilot Studio, Power Automate, OpenAI, n8n ([ADR 0005](../decisions/0005-scope-external-agents.md)). |
+| **Source adapter** | Component that reads one provider's run logs and converts them into rAIght's common run-log schema. Mocked in the demo. |
+| **Run log** | Record of one run of an automation: tokens, steps (tool calls), output – normalised across providers. |
 | **Same-path share** | Share of an agent's runs that took an identical sequence of steps. Simple statistics on run logs. |
 | **Output / path similarity** | How alike an agent's replies (output) or its tool-call sequences (path) are across runs. |
 | **Uniform agent** | An agent whose runs have become near-identical: it behaves like a workflow but costs like an agent. |
@@ -21,4 +23,5 @@ Use these terms consistently – in docs, issues, code and the UI.
 | **Exception scope** | The cases an agent still handles after conversion. |
 | **Pivotal event** | An event where responsibility passes from one bounded context to the next. |
 | **Carbon budget** | Annual cap on AI-related emissions (or compute as a proxy) per business unit. Prevents the rebound effect. |
+| **Taskforce** | The internal team (us) commissioned by the CIO office to cut token costs and CO₂ of employee-built AI automations. |
 | **Rebound effect** | Efficiency gains leading to more usage, so total consumption falls less than expected or rises. |
