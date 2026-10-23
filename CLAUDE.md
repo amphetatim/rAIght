@@ -42,6 +42,10 @@ _TBD once the stack is decided_ – install, run, test, lint, format.
 
 ## Rules for Claude
 
+### 0. Project language is always English
+
+Everything in this repo is **English** – code, identifiers, comments, commit messages, PR and issue texts, docs and UI texts – even when the user writes to you in another language. Answer the user in their language, but write anything that goes into the repo in English.
+
 ### 1. Structural changes need explicit confirmation
 
 These files are **structural**. Before creating, editing, moving or deleting any of them – with any tool, including Bash – **stop and tell the user**: "This is a structural change to the project", which file, what changes and why. Then **wait for an explicit yes**. A hook (`.claude/hooks/protect-structure.sh`) also asks for confirmation, but don't rely on it.

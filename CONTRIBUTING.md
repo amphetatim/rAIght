@@ -2,6 +2,8 @@
 
 Simple rules so eight people can work in one repository without getting in each other's way. Change them together when they stop helping.
 
+**Project language: always English** – code, comments, commits, issues, PRs and docs.
+
 ## 1. Work starts with an issue
 
 - Every piece of work has an **issue**: a user story, a task, a spike (research) or a bug.

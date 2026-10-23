@@ -2,6 +2,10 @@
 
 How we write and review code. Applies to everyone – and to Claude. Tool-specific parts (formatter, linter, test runner) are filled in once the stack ADR is accepted.
 
+## 0. Language
+
+**The project language is always English**: code, identifiers, comments, commit messages, branch names, PR and issue texts, docs and UI texts. No exceptions, also when you talk to Claude in another language.
+
 ## 1. Git and pull requests
 
 | Rule | Detail |
