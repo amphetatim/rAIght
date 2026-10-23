@@ -1,6 +1,6 @@
 # Demo script
 
-> 📝 **Skeleton – owned by Luisa (PO), with Wenxuan (UX).** This is the **scope boundary** for the build ([ADR 0004](../decisions/0004-demo-first-scope.md)): what isn't in this script isn't built. Every step names the issue that delivers it.
+> 📝 **Skeleton – owned by Tim (PO), with Wenxuan (UX).** This is the **scope boundary** for the build ([ADR 0004](../decisions/0004-demo-first-scope.md)): what isn't in this script isn't built. Every step names the issue that delivers it.
 
 **Story:** Lena, Recruiting Operations Lead at SAP HR, learns when an agent is really needed, builds an automation with the triage, and later finds out that some of her agents behave like workflows.
 
