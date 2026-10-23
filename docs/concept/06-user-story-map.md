@@ -8,7 +8,7 @@
 
 | Usage step | Get started | Plan an automation | Build it | Run it | Review it | Improve it |
 |---|---|---|---|---|---|---|
-| **Activities** | Learn the ladder · Practise triage | Describe the task · Apply the triage | Build on the platform · Note why an agent | Handle requests · Escalate exceptions | Check the dashboard · Act on flags | Convert to workflow · Retire agent |
+| **Activities** | Learn the ladder · Practise triage | Describe the task · Apply the triage | Build in her tool · Note why an agent | Handle requests · Escalate exceptions | Check the dashboard · Act on flags | Convert to workflow · Retire agent |
 
 ## Releases
 
@@ -17,6 +17,7 @@
 | **R1** | Walking skeleton – *Learn & see* | Covers the whole journey once, in its simplest form. Needs no new data. |
 | **R2** | Act – *Convert with help* | Makes the lean option the easy option |
 | **R3** | Steer – *Budgets & sharing* | Steering and scaling |
+| *Beyond* | *SAP integration & offering* | Migrate into the SAP stack, add SAP agents as a source, offer to customers ([ADR 0005](../decisions/0005-scope-external-agents.md)) |
 
 ## User stories
 

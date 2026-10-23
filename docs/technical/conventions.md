@@ -35,15 +35,14 @@ How we write and review code. Applies to everyone – and to Claude. Tool-specif
 | Config | No magic numbers for thresholds (e.g. "uniform" share, "unused" period) – put them in one config place |
 | Comments | Explain *why*, not *what* |
 
-## 4. Tests
+## 4. Checks
 
-We build a demo ([ADR 0004](../decisions/0004-demo-first-scope.md)), so tests are targeted, not exhaustive:
+We build a pure clickable demo ([ADR 0006](../decisions/0006-pure-clickable-demo.md)) – there is no logic to unit-test.
 
-- **Metrics** (same-path share, token sums, unused detection) and the **triage logic** → unit tests, always. They're pure functions; test them with small, hand-made run logs.
-- Bug fix in that logic → a test that fails without the fix.
-- **Everything else** (UI, mock adapters, API plumbing) → checked by running the [demo script](demo-script.md) end to end before merging to `main`.
+- Before merging: **click through the part of the [demo script](demo-script.md)** your PR touches, in the browser.
+- Numbers on screen come from `app/data/` and must match across pages.
 - No production hardening (auth, retries, load) – out of scope.
-- CI must be green before merge (once CI exists).
+- Lint must pass (once set up).
 
 ## 5. Formatting and linting
 

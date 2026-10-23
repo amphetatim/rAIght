@@ -64,6 +64,6 @@ Created by Tim on 23 Oct 2026 in the repo (repo → *Projects*). It belongs to T
 
 ## Labels
 
-`user-story`, `task`, `bug` (from the issue templates) plus workstreams: `frontend`, `backend`, `data`, `business`, `pitch`, `training`, `structure`.
+`page` (P0–P7), `data` (D1), `pitch`, `business`, `task`, `bug`, plus `pitch-only` for R2/R3 stories that are not built. Milestone: **Demo – 20 Nov** ([ADR 0006](../decisions/0006-pure-clickable-demo.md)).
 
 _Last updated: 2026-10-23_

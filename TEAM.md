@@ -24,11 +24,11 @@ This file is the single source of truth for **who does what**. Changes to roles 
 
 | Name | GitHub | Role | Responsibilities |
 |---|---|---|---|
-| Wenxuan | [@Venson101](https://github.com/Venson101) | **Tech Lead** (with Ebubekir) + **Frontend / UX** + **Repo structure** | Tech Lead for the frontend side and the repo: architecture decisions with Ebubekir, reviews of structural PRs, project setup/CI. Wireframes, user flow, triage page, agent-reason form, training module UI. Repo structure: folder layout, labels, CODEOWNERS, templates, PR hygiene |
-| Ali | [@aluschek](https://github.com/aluschek) | **Frontend** (lead) | rAIght dashboard (usage per agent, flagged agents, retire action), frontend structure |
-| Ebubekir | [@ebu2000](https://github.com/ebu2000) | **Tech Lead** (with Wenxuan) + **Backend** | Tech Lead for the backend/data side: leads the stack decision (#18) with Wenxuan, keeps data model and API consistent, reviews PRs touching structure/data/API, makes sure `main` runs end to end. API and data model (agents, runs, agent reasons), endpoints for the dashboard |
-| Ivan | [@Ivangb-626](https://github.com/Ivangb-626) | **Backend** | Run-log ingestion and storage, token metrics per agent, retire/status logic |
-| Kyoungmi | [@KyoungmiKwon](https://github.com/KyoungmiKwon) | **Data / Analysis** | Mock run-log generator, same-path detection (agents that behave like workflows), demo data. Python reference if Python is used |
+| Wenxuan | [@Venson101](https://github.com/Venson101) | **Tech Lead** (with Ebubekir) + **Frontend / UX** + **Repo structure** | Tech Lead for the frontend side and the repo: architecture decisions with Ebubekir, reviews of structural PRs, project setup/CI. Wireframes and user flow; demo pages **P0 shell** and **P1 start page**. Repo structure: folder layout, labels, CODEOWNERS, templates, PR hygiene |
+| Ali | [@aluschek](https://github.com/aluschek) | **Frontend** (lead) | Demo pages **P5 dashboard** and **P6 agent detail** (with Ivan) |
+| Ebubekir | [@ebu2000](https://github.com/ebu2000) | **Tech Lead** (with Wenxuan) + **Backend** | Tech Lead for the backend/data side: leads the stack decision (#18) with Wenxuan, keeps the sample data consistent, reviews PRs touching structure/data, makes sure `main` runs end to end. Sample data **D1** (with Kyoungmi), demo pages **P3 plan/triage** and **P7 escalations** |
+| Ivan | [@Ivangb-626](https://github.com/Ivangb-626) | **Frontend / data** | Demo pages **P4 inventory** and **P6 agent detail** (with Ali) |
+| Kyoungmi | [@KyoungmiKwon](https://github.com/KyoungmiKwon) | **Data** | Sample data **D1** (with Ebubekir), demo page **P2 learn** |
 
 ### Tech Leads
 
@@ -37,18 +37,18 @@ Ebubekir and Wenxuan share the role: **Ebubekir** covers backend, data model and
 ### Pairs
 
 - **Frontend:** Ali + Wenxuan (Wenxuan designs, Ali leads the implementation, both build)
-- **Backend:** Ebubekir (API / data model) + Ivan (logs / metrics)
-- **Data:** Kyoungmi works closely with Ivan (analysis runs on his log data)
+- **Data:** Kyoungmi + Ebubekir (sample data D1)
+- **Dashboard + detail:** Ali + Ivan (P5, P6)
 - **Business:** Julian + Tinja
 
 ## Shared responsibilities
 
 | Task | Owner |
 |---|---|
-| Tests | Every developer writes tests for their own code |
+| Checks | Every developer clicks through their part of the demo script before merging |
 | Code review | Every PR needs 1 approval, ideally from the other sub-team (frontend ↔ backend), rotating |
 | CI / deployment | Set up by the Tech Leads (Wenxuan); everyone keeps their own part green |
-| Demo data | Kyoungmi |
+| Sample data | Kyoungmi, Ebubekir (D1) |
 | Demo environment and screen recording for the video | Whole tech team in the final sprint, coordinated by the Tech Leads, delivered to Tinja |
 | Bug bash before the pitch | Everyone, final sprint |
 
@@ -59,7 +59,7 @@ Ebubekir and Wenxuan share the role: **Ebubekir** covers backend, data model and
 | User stories and priorities | Tim (PO) ↔ Tech Leads | Weekly sync |
 | User flow, wireframes, demo script | Tim (PO) ↔ Wenxuan | Sprint 1 |
 | Technical feasibility of scope | Tech Leads → Tim (PO) | When a story is unclear or too big |
-| Savings formula → metrics | Julian ↔ Kyoungmi / Ivan | Early (shapes the data model) |
+| Savings figures → sample data | Julian ↔ Kyoungmi / Ebubekir | Week 1 (numbers must fit the business case) |
 | Training content → UI | Tinja ↔ Wenxuan | Sprint 1–2 |
 | Demo recording → video | Tech team ↔ Tinja | Final sprint |
 

@@ -1,25 +1,14 @@
-# app/ – implementation (IS 613)
+# app/ – the rAIght demo (IS 613)
 
-The code for rAIght lives here. We build a **demo**, not a production system: external systems are mocked, metrics are real, and the [demo script](../docs/technical/demo-script.md) defines the scope ([ADR 0004](../docs/decisions/0004-demo-first-scope.md)). **The technology stack is not decided yet.** Wait for the IS 613 requirements and record the decision as an ADR in [`docs/decisions/`](../docs/decisions/).
+A **pure clickable demo**, frontend only, running on finished sample data ([ADR 0006](../docs/decisions/0006-pure-clickable-demo.md)). Deadline: **20 November 2026**.
 
-## What Release 1 needs technically
-
-From the [user story map](../docs/concept/06-user-story-map.md), the walking skeleton needs:
-
-| Need | Why |
+| What | Where |
 |---|---|
-| **Run log ingestion** | Read agent run logs (tokens, steps, output) – the only data source of the dashboard |
-| **Metrics** | Token usage per agent; *same-path share* (share of runs with an identical sequence of steps) – simple statistics, no extra AI |
-| **Dashboard UI** | Per agent: usage, same-path share, suggestion (e.g. "Convert to workflow") |
-| **Agent inventory** | List of agents with owner and purpose, incl. a one-line reason why an agent was chosen |
-| **Training content** | Ladder and triage material (can start as static pages) |
+| What the demo shows (scope) | [demo script](../docs/technical/demo-script.md) |
+| Sample data format | [sample-data.md](../docs/technical/sample-data.md) |
+| Look and feel | [design-system.md](../docs/technical/design-system.md) |
+| Pages and owners | GitHub issues P0–P7, D1, X1 |
 
-For a course prototype, the run logs can be **simulated** with realistic sample data for the four recruiting agents in the concept.
+**Framework:** chosen by the Tech Leads (#18 → ADR 0007). Until then, please don't add a framework here.
 
-## Questions to settle once IS 613 starts
-
-1. Is a stack prescribed (e.g. SAP BTP with CAP and SAPUI5/Fiori), or is it free?
-2. Where does it run – locally only, or deployed to a cloud account the course provides?
-3. ~~Real or simulated run logs?~~ → simulated ([ADR 0004](../docs/decisions/0004-demo-first-scope.md))
-
-Until then, please don't add a framework here – it is easy to start, hard to undo.
+Run instructions follow once the framework is chosen.

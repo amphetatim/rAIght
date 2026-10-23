@@ -1,6 +1,6 @@
 # 3 · Solution
 
-rAIght supports the process owner through one loop. **She does every step herself.**
+rAIght supports the process owner through one loop. **She does every step herself** – in the external tools she already builds with ([ADR 0005](../decisions/0005-scope-external-agents.md)).
 
 ```mermaid
 flowchart LR
@@ -33,7 +33,7 @@ There is no approval gate. The dashboard is the check **after the fact**: a wron
 
 ## 3 Monitor – dashboard
 
-Built on run logs that already exist. **No extra AI checks the AI** – only simple statistics.
+Built on run logs the providers already write (Copilot Studio, Power Automate, OpenAI, n8n), normalised into one view. **No extra AI checks the AI** – only simple statistics.
 
 | Column | Meaning |
 |---|---|
@@ -57,7 +57,7 @@ Flags (example thresholds, to be validated):
 
 ## 4 Convert – guided conversion
 
-- rAIght shows the agent's most frequent paths as a **draft workflow**, generated from log statistics
+- rAIght shows the agent's most frequent paths as a **draft workflow**, generated from log statistics – in the same tool (Copilot Studio agent → Power Automate flow, n8n AI node → plain n8n workflow)
 - The process owner accepts and adjusts it – **no developer needed**
 - Standard cases go to the workflow; the agent keeps only the exceptions
 - No exceptions left for 90 days → agent is retired
@@ -65,9 +65,9 @@ Flags (example thresholds, to be validated):
 
 ## Use cases (illustrative, recruiting admin)
 
-| Process | Today | Should be | Agent only for |
-|---|---|---|---|
-| Application status | Agent answers every "where is my application?" | Workflow: notifications at each stage | Unusual questions, complaints |
-| Document check | Agent reads every application | Rule: form checks required fields | Unclear or foreign certificates |
-| Interview scheduling | Agent emails, compares calendars, books rooms | Workflow: candidate picks a slot | Multi-round panels across time zones |
-| Offer letters | Agent drafts each offer from scratch | Workflow: template from approved data; human signs | Non-standard packages |
+| Process | Built with (example) | Today | Should be | Agent only for |
+|---|---|---|---|---|
+| Application status | Copilot Studio | Agent answers every "where is my application?" | Workflow: notifications at each stage | Unusual questions, complaints |
+| Document check | Power Automate + AI Builder | Agent reads every application | Rule: form checks required fields | Unclear or foreign certificates |
+| Interview scheduling | n8n | Agent emails, compares calendars, books rooms | Workflow: candidate picks a slot | Multi-round panels across time zones |
+| Offer letters | OpenAI Assistant | Agent drafts each offer from scratch | Workflow: template from approved data; human signs | Non-standard packages |

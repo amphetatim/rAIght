@@ -14,7 +14,7 @@ We're 8 people: 2 who prefer non-technical work (Julian, Tinja) and 6 who are co
 | **Ebubekir + Wenxuan as joint Tech Leads** | Splits the load along the natural seam: Ebubekir backend/data/API, Wenxuan frontend/repo/CI. Joint decisions go into ADRs so they don't depend on one person |
 | **No Scrum Master** | The team is small and the work is clear enough to self-organise on the board. What replaces the role: board rules in `TEAM.md` (pick from *Ready*, max. 2 in progress, blockers as issue comments) and a weekly sync run by the PO. If things start to stall, revisit this |
 | **Wenxuan responsible for repo structure** | Has GitHub experience. Tim stays repo owner, so owner-only settings go through him (see [04](04-git-and-github.md)) |
-| **Pairs (Ali + Wenxuan, Ebubekir + Ivan, Kyoungmi + Ivan)** | No single point of failure; review partner built in |
+| **One page per developer, pairs where pages meet** (Ali + Ivan on dashboard/detail, Kyoungmi + Ebubekir on sample data) | Pure clickable demo ([ADR 0006](../decisions/0006-pure-clickable-demo.md)): pages can be built in parallel; clear ownership avoids people working on the same file |
 | **No dedicated DevOps/QA person** | Tests, reviews and the demo are shared – everyone tests their own code, reviews rotate |
 
 ## Where we keep what
@@ -32,6 +32,6 @@ We're 8 people: 2 who prefer non-technical work (Julian, Tinja) and 6 who are co
 
 ## Interfaces between the groups
 
-See the table in [`TEAM.md`](../../TEAM.md#interfaces). The most time-critical one: **Julian's savings formula → Kyoungmi/Ivan's metrics**, because it shapes the data model.
+See the table in [`TEAM.md`](../../TEAM.md#interfaces). The most time-critical one: **Julian's savings figures → the sample data (Kyoungmi/Ebubekir)**, because the numbers in the demo must fit the business case.
 
 _Last updated: 2026-10-23_

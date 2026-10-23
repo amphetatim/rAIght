@@ -9,20 +9,21 @@ Team **Scrumsterz**, University of Mannheim. IS 615 = concept (done), IS 613 = i
 - **Persona:** Lena, Recruiting Operations Lead at SAP HR. She builds her own automations; there is **no AI developer in the loop** ([ADR 0001](docs/decisions/0001-process-owner-owns-the-lifecycle.md)).
 - **Parts:** Learn (ladder + triage training) → Build (Lena applies triage, notes an *agent reason*) → Monitor (dashboard on run logs) → Convert (uniform agents → workflows).
 - **Monitoring uses plain statistics on run logs, never AI** ([ADR 0002](docs/decisions/0002-no-ai-to-check-ai.md)). Don't add model calls to the metrics.
-- **Demo-first** ([ADR 0004](docs/decisions/0004-demo-first-scope.md)): we build a demo, not a production system. External SAP systems are **named but mocked** via one adapter layer; APIs are defined but implemented only as far as the demo needs; no auth, real persistence, scaling or production hardening. **Metrics are computed for real** on mock data. The [demo script](docs/technical/demo-script.md) is the scope boundary: **don't build what it doesn't show**.
-- **Current scope: Release 1 (walking skeleton)** – see [user story map](docs/concept/06-user-story-map.md). Don't build R2/R3 features unless the issue says so.
+- **Scope** ([ADR 0005](docs/decisions/0005-scope-external-agents.md)): agents and automations employees build with **external providers** – Copilot Studio, Power Automate, OpenAI, n8n. **No chat usage**, no SAP-internal agent platforms (later stage). Framing: the CIO office commissioned a taskforce to cut token costs and CO₂.
+- **Pure clickable demo** ([ADR 0006](docs/decisions/0006-pure-clickable-demo.md), deadline **20 Nov 2026**): **frontend only** – no backend, no API, no adapters, no database. All data comes from **finished sample data** in `app/data/` ([sample-data.md](docs/technical/sample-data.md)); metrics are **not calculated**. Providers are shown by name only. The [demo script](docs/technical/demo-script.md) is the scope boundary: **don't build what it doesn't show**.
+- **Backlog = one issue per page** (P0 foundation, P1 start, P2 learn, P3 plan/triage, P4 inventory, P5 dashboard, P6 agent detail, P7 escalations) plus D1 sample data and X1 recording. Work on the page issue you're assigned; R2/R3 is pitch-only.
 - Use the terms from the [glossary](docs/concept/09-glossary.md) in code, UI and docs (e.g. `same_path_share`, `agent_reason`, `uniform agent`).
 
 ## Tech stack
 
-**Not decided yet** (see [app/README.md](app/README.md)). Until an ADR for the stack is accepted, do not add a framework, package manager or dependency to `app/`. Once decided, fill in:
+**Frontend only** ([ADR 0006](docs/decisions/0006-pure-clickable-demo.md)). The framework is chosen by the Tech Leads (#18 → ADR 0007). Until then, do not add a framework, package manager or dependency to `app/`. Once decided, fill in:
 
 | Part | Choice |
 |---|---|
-| Frontend | _TBD_ |
-| Backend | _TBD_ |
-| Analysis / mock data | _TBD_ (Python if needed – reference: Kyoungmi) |
-| Tests / lint / format | _TBD_ |
+| Frontend framework | _TBD (ADR 0007)_ |
+| Data | JSON files in `app/data/` |
+| Backend | none |
+| Lint / format | _TBD_ |
 
 ## Commands
 
@@ -34,7 +35,7 @@ _TBD once the stack is decided_ – install, run, test, lint, format.
 |---|---|---|
 | `app/` | Implementation – has its own `CLAUDE.md` | Working on code |
 | `docs/concept/` | Concept from IS 615 (source of truth for *what* we build) | Unsure about a feature's intent |
-| `docs/technical/` | Architecture, data model, API, coding conventions, **demo script** | Before changing structure, data or endpoints; demo script when unsure if something is in scope |
+| `docs/technical/` | Architecture, **sample data**, coding conventions, **demo script**, **design system** | Before changing structure or data; demo script when unsure if something is in scope; design system before any UI work |
 | `docs/decisions/` | ADRs | Before reopening a settled question |
 | `docs/handbook/` | **Human documentation only** – see rule below | Only when updating it, or when explicitly asked |
 | `TEAM.md`, `CONTRIBUTING.md` | Roles, ways of working, git rules | Questions about who/how |
@@ -63,8 +64,8 @@ Never edit these files via Bash (`sed -i`, `>`, `tee`, `mv`, `rm`) to get around
 3. For anything larger than a small, single-file change: propose a short plan first and wait for OK.
 4. Stay inside the issue's scope. Ask before touching unrelated files.
 5. Follow [docs/technical/conventions.md](docs/technical/conventions.md).
-6. Run tests and lint before saying "done". Say clearly if something could not be tested.
-7. If behaviour, data model or API changed, update `docs/technical/` (structural → confirm first).
+6. Run lint (once set up) and click through the affected part of the demo script before saying "done". Say clearly if something could not be checked.
+7. If the sample-data format or page structure changed, update `docs/technical/` (structural → confirm first).
 
 ### 4. Never
 

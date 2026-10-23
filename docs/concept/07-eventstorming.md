@@ -25,7 +25,7 @@ flowchart LR
 | **Agent Monitoring** | Monitoring service | Run logs collected → Token usage calculated · Same-path share calculated → Dashboard updated → **★ Agent flagged as uniform** / Agent flagged as unused | H4, H5, H6 |
 | **Agent Conversion** | Process owner | Flag reviewed → Draft workflow generated from frequent paths → Conversion accepted / rejected with reason → **★ Agent scope reduced to exceptions** → Agent retired → Conversion case added to training | H7 |
 
-External systems: learning platform · low-code / agent platform · LLM / cloud provider · agent platform logs.
+External systems: learning platform · automation tools (Copilot Studio, Power Automate, OpenAI, n8n) · their run logs · LLM / cloud provider.
 
 ## Decision rules (former policies)
 

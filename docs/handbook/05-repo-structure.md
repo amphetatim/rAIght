@@ -12,14 +12,13 @@ rAIght/
 │   ├── hooks/protect-structure.sh
 │   ├── commands/              # /start-issue, /pr-ready, /update-docs
 │   └── agents/reviewer.md     # review subagent
-├── app/                       # implementation (IS 613)
+├── app/                       # pure clickable demo (IS 613, ADR 0006) – frontend only
 │   ├── CLAUDE.md              # rules for all code
-│   ├── frontend/  (planned)   # + own CLAUDE.md
-│   ├── backend/   (planned)   # + own CLAUDE.md
-│   └── analysis/  (planned)   # + own CLAUDE.md
+│   ├── data/      (planned)   # finished sample data (JSON) – D1
+│   └── pages …    (planned)   # one per page P1–P7, layout fixed with ADR 0007
 ├── docs/
 │   ├── concept/               # WHAT and WHY – concept from IS 615 (source of truth)
-│   ├── technical/             # HOW – architecture, data model, API, conventions, demo script
+│   ├── technical/             # HOW – architecture, sample data, conventions, demo script, design system
 │   ├── decisions/             # ADRs – decisions that affect the whole team
 │   ├── handbook/              # this – explanations for humans, not loaded by Claude
 │   ├── presentations/         # decks (.pptx)
@@ -48,4 +47,4 @@ rAIght/
 
 A new top-level folder or a new `app/` sub-folder is a structural change: add it here, to the tree in [`README.md`](../../README.md), and – for code folders – a `CLAUDE.md` and a `CODEOWNERS` line.
 
-_Last updated: 2026-10-18_
+_Last updated: 2026-10-23_
