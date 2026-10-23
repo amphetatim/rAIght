@@ -2,6 +2,7 @@
 
 - **Status:** accepted
 - **Date:** 2026-10-18
+- **Partly superseded by:** [ADR 0006](0006-pure-clickable-demo.md) – no source adapters, no API, metrics not calculated; pure clickable demo on finished sample data
 - **Amended by:** [ADR 0005](0005-scope-external-agents.md) – the external systems are now third-party providers (Copilot Studio, Power Automate, OpenAI, n8n), not SAP platforms
 
 ## Context

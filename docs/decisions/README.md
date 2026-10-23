@@ -21,4 +21,5 @@ Format:
 | [0003](0003-shared-claude-context-and-protected-files.md) | Shared Claude Code context and protected structural files (proposed) |
 | [0004](0004-demo-first-scope.md) | Demo-first scope: external systems mocked, metrics real, demo script as scope boundary |
 | [0005](0005-scope-external-agents.md) | Scope: external agents and automations (Copilot Studio, Power Automate, OpenAI, n8n); chat out; SAP integration later; CIO-office taskforce framing |
-| *0006* | Technology stack for IS 613 – to be decided |
+| [0006](0006-pure-clickable-demo.md) | Pure clickable demo: frontend only, finished sample data, one issue per page |
+| *0007* | Frontend framework – to be decided by the Tech Leads (#18) |

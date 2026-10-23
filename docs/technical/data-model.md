@@ -1,6 +1,6 @@
 # Data model
 
-> 📝 **Draft** – a starting point derived from the concept. Field names and types are confirmed by the backend and data owners before the first implementation PR.
+> 🗄️ **Not used by the demo** ([ADR 0006](../decisions/0006-pure-clickable-demo.md)) – the demo runs on [sample-data.md](sample-data.md). Kept as the data model of the real product, e.g. for the architecture slide in the pitch.
 
 Terms follow the [glossary](../concept/09-glossary.md).
 

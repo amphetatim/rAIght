@@ -1,41 +1,29 @@
 # Architecture
 
-> 📝 **Draft.** Components follow from Release 1 of the [user story map](../concept/06-user-story-map.md) and the [demo script](demo-script.md). Technologies are filled in once the stack ADR is accepted.
->
-> **Demo-first** ([ADR 0004](../decisions/0004-demo-first-scope.md)): external systems are named but mocked; only the metrics are computed for real.
-> **Scope** ([ADR 0005](../decisions/0005-scope-external-agents.md)): sources are external providers – Copilot Studio, Power Automate, OpenAI, n8n.
+> **Pure clickable demo** ([ADR 0006](../decisions/0006-pure-clickable-demo.md)): frontend only, finished sample data, no backend. Framework: _TBD (#18 → ADR 0007)_.
 
-## Components (Release 1)
+## The demo
 
 ```
- [simulated providers: Copilot Studio · Power Automate · OpenAI · n8n]
-      │ one source adapter per provider (mock – reads fixtures)
-      ▼ converts into ONE common run-log schema
- Mock run-log generator ──► Run-log ingestion ──► Store ──► Metrics ──► API ──► Dashboard UI
-   (app/analysis)              (app/backend)                 (backend /      (app/frontend)
-                                                              analysis)
-                                                                         └──► Triage page,
-                                                                              agent-reason form,
-                                                                              training pages
+ app/data/*.json  ──►  pages (P1–P7)  inside the app shell (P0)
+ finished sample        Start · Learn · Plan · Inventory · Dashboard · Agent detail · Escalations
+ data (D1)              client-side state only (triage answers, retired agent, filters)
 ```
 
-| Component | Responsibility | In the demo | Owner(s) |
+| Part | Responsibility | Issue | Owner(s) |
 |---|---|---|---|
-| Source adapters (mock) | One per provider, named like the real service (`copilotStudio.getRunLogs()`, `powerAutomate…`, `openAI…`, `n8n…`); each returns fixture data **in the common schema** ([data-model.md](data-model.md)) | Mocked by design | Ebubekir, Ivan |
-| Mock run-log generator | Simulated run logs matching the demo script's data requirements | Script, run once → JSON fixtures | Kyoungmi |
-| Run-log ingestion | Read run logs via the adapter | Light: load + basic shape check | Ivan |
-| Store | Hold agents and run logs | In memory / JSON file; no database unless needed | Ivan |
-| Agent inventory | Agents from **all providers** with owner, purpose, provider, ladder step, agent reason (H3) | Mocked import + in-memory changes (agent reason, retire) | Ebubekir |
-| Metrics | Token usage per agent, same-path share, unused detection – plain statistics ([ADR 0002](../decisions/0002-no-ai-to-check-ai.md)) | **Real calculation**, unit-tested | Kyoungmi, Ivan |
-| API | Exposes inventory and metrics to the frontend ([api.md](api.md)) | In-process functions or thin fixture server; no auth | Ebubekir |
-| Dashboard UI | Usage, same-path share and suggestion per agent, provider column + filter; retire action | Real UI | Ali |
-| Triage & training UI | Ladder and triage pages, agent-reason form | Real UI, static content | Wenxuan |
+| App shell | Navigation, layout, design tokens, loading the JSON files | P0 | Wenxuan |
+| Sample data | Agents with finished metrics, summary, content texts ([sample-data.md](sample-data.md)) | D1 | Kyoungmi, Ebubekir |
+| Start page | Welcome, the four steps, headline numbers | P1 | Wenxuan |
+| Learn | Automation ladder, triage cheat sheet | P2 | Kyoungmi |
+| Plan an automation | Clickable triage, agent reason | P3 | Ebubekir |
+| Agent inventory | All agents across providers | P4 | Ivan |
+| Dashboard | Summary, attention list, agent table | P5 | Ali |
+| Agent detail | Paths, suggestion, retire | P6 | Ali, Ivan |
+| Escalations *(optional)* | Cases routed to Lena | P7 | Ebubekir |
 
-**Not built:** login/roles, real integrations, database, deployment pipeline (unless the course requires it), data-protection handling.
+**Not built:** backend, API, provider connections, database, login, deployment pipeline (unless needed for the recording).
 
-## Open questions
+## The real product (for the pitch only)
 
-- Stack and hosting (local only vs. cloud) – see [app/README.md](../../app/README.md)
-- Storage: in memory vs. JSON file (a database is likely unnecessary for the demo)
-- Are metrics computed on request or pre-computed?
-- What step-level data the real providers expose (hotspot H8) – affects how plausible the adapters are, not the demo itself
+The real rAIght would read run logs from each provider through one source adapter per provider, normalise them into one schema ([data-model.md](data-model.md)) and calculate the metrics with plain statistics ([ADR 0002](../decisions/0002-no-ai-to-check-ai.md)). This is shown on a slide, not built.

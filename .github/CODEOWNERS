@@ -6,15 +6,14 @@
 # Default: Tech Leads (Ebubekir, Wenxuan)
 *                         @ebu2000 @Venson101
 
-# --- Code (planned layout – adjust after the stack ADR) ---
-/app/frontend/            @aluschek @Venson101
-/app/backend/             @ebu2000 @Ivangb-626
-/app/analysis/            @KyoungmiKwon @Ivangb-626
+# --- Code (pure clickable demo, ADR 0006 – refine per page folder after ADR 0007) ---
+/app/                     @Venson101 @ebu2000 @aluschek
+/app/data/                @KyoungmiKwon @ebu2000
 
 # --- Docs ---
 /docs/concept/            @amphetatim @ebu2000 @Venson101
 /docs/technical/          @ebu2000 @Venson101
-/docs/technical/api.md    @ebu2000 @aluschek @Venson101
+/docs/technical/sample-data.md @KyoungmiKwon @ebu2000
 /docs/technical/data-model.md  @ebu2000 @Ivangb-626 @KyoungmiKwon
 /docs/decisions/          @ebu2000 @Venson101 @amphetatim
 /docs/handbook/           @Venson101 @ebu2000 @amphetatim

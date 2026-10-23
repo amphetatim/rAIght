@@ -174,7 +174,7 @@ Solid, rounded, single-colour glyphs in forest-700, the style of **Font Awesome 
 - Data colours: tokens → orange-400; good/neutral → forest-700 / green-300; problem → red-500. Lime is reserved for brand accents, not data.
 - Keep charts flat: no 3D, no gradients, light gridlines (line-100) or none.
 - Always show the unit or the explanation in a small italic caption below (as on slide 3: *"Tokens straight from the run logs · 'Same path' = share of runs with identical steps · no extra AI checks the AI"*).
-- Mark simulated values: a small italic "Illustrative values" / "Demo data" label top right, as in the deck ([ADR 0004](../decisions/0004-demo-first-scope.md)).
+- Mark simulated values: a small italic "Illustrative values" / "Demo data" label top right, as in the deck ([ADR 0006](../decisions/0006-pure-clickable-demo.md)).
 
 ## 9. Voice in the UI
 
@@ -183,7 +183,7 @@ Short, plain English, sentence case, verbs first on buttons ("Convert to workflo
 ## 10. Don'ts
 
 - **No Disney characters or other copyrighted figures.** The deck's Lena avatar is a placeholder from the pitch and must not appear in the software. Use initials in a forest-700 circle ("L") or a neutral illustration instead.
-- No SAP logos or SAP Fiori branding: we show SAP systems by name only (demo-first).
+- No logos of SAP, Microsoft, OpenAI or n8n, and no SAP Fiori branding: providers and systems appear **by name only** ([ADR 0005](../decisions/0005-scope-external-agents.md)).
 - No gradients, glows, drop shadows on everything, or rounded "bubbly" cards.
 - No lime text on white except the logo; no more than one lime element per component.
 - No new colours outside this file. If you need one, propose it (structural change).

@@ -10,11 +10,11 @@ Read `docs/technical/conventions.md` first, then review the diff you're given (o
 
 Check, in this order:
 
-1. **Correctness:** bugs, unhandled edge cases, wrong assumptions about the data model (`docs/technical/data-model.md`) or API (`docs/technical/api.md`).
-2. **Scope:** changes unrelated to the issue; R2/R3 features sneaking into an R1 issue.
-3. **Project rules:** metrics use statistics, not model calls (ADR 0002); mock data only; glossary terms used.
+1. **Correctness:** bugs, broken click paths, wrong assumptions about the sample data (`docs/technical/sample-data.md`).
+2. **Scope:** changes unrelated to the page issue; anything not in the demo script; backend/API code (the demo is frontend only, ADR 0006).
+3. **Project rules:** values come from `app/data/`, not calculated or hard-coded in pages; providers by name only; design-system tokens; glossary terms used.
 4. **Security:** secrets, `.env` content, personal data, unvalidated input at the API boundary.
-5. **Tests:** new logic without tests; bug fix without a reproducing test.
+5. **Checks:** did the author click through the affected demo-script steps?
 6. **Maintainability:** duplication, dead or commented-out code, unclear names, functions doing too much.
 7. **Structure & docs:** structural files changed (list them); `docs/technical/` or `docs/handbook/` not updated where needed; new dependency without a reason.
 

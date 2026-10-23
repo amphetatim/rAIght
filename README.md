@@ -21,7 +21,7 @@ rAIght gives the process owner three things:
 
 **The process owner owns the whole lifecycle.** There is no separate AI developer in the loop (see [ADR 0001](docs/decisions/0001-process-owner-owns-the-lifecycle.md)).
 
-**Scope of the implementation:** a demo along a defined [demo script](docs/technical/demo-script.md). External providers are named but mocked, the metrics are computed for real ([ADR 0004](docs/decisions/0004-demo-first-scope.md)).
+**Scope of the implementation:** a **pure clickable demo** along a defined [demo script](docs/technical/demo-script.md), frontend only, on finished sample data – deadline 20 Nov 2026 ([ADR 0006](docs/decisions/0006-pure-clickable-demo.md)).
 
 ## Repository structure
 
@@ -63,7 +63,7 @@ rAIght/
 - [x] Shared Claude Code setup ([handbook](docs/handbook/02-claude-setup.md))
 - [ ] `main` protected (pending GitHub Pro)
 - [ ] Technology stack decided ([app/README.md](app/README.md))
-- [ ] Release 1 (walking skeleton) – see the **R1** milestone in Issues
+- [ ] Clickable demo – pages P0–P7, sample data D1, recording X1 (milestone **Demo – 20 Nov**)
 
 ## Getting started as a team member
 
