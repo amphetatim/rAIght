@@ -1,6 +1,6 @@
 # 4 · Value proposition & business model
 
-rAIght is an **internal programme**. The customer is the SAP CIO office; the users are process owners.
+rAIght starts as an **internal tool**: the SAP CIO office commissioned it from a taskforce; the users are process owners. Once proven, it becomes a product (see *Phase 2*).
 
 > **The CIO office can automate more without increasing emissions – and spends less on AI.**
 
@@ -8,8 +8,8 @@ rAIght is an **internal programme**. The customer is the SAP CIO office; the use
 
 | Customer profile | | Value map | |
 |---|---|---|---|
-| **Jobs** | Deliver the Autonomous Enterprise · keep SAP on its net zero path · control AI cost and risk | **Products & services** | rAIght training · dashboard · guided conversion |
-| **Pains** | Agent sprawl nobody reviews · compute and emissions grow with every agent · no visibility per automation | **Pain relievers** | Every agent visible with its usage · uniform agents flagged and converted · unused agents retired |
+| **Jobs** | Let employees automate with AI · control token and licence costs · keep SAP on its net zero path · govern shadow AI | **Products & services** | rAIght training · dashboard · guided conversion |
+| **Pains** | Agent sprawl across external tools nobody reviews · token costs and emissions grow with every agent · no visibility per automation or provider | **Pain relievers** | Every agent visible with its usage · uniform agents flagged and converted · unused agents retired |
 | **Gains** | Same or better service level · measurable progress to net zero · lower running cost | **Gain creators** | Process owners choose lean themselves, so it scales without a central team · savings visible per unit · AI budget freed for high-value use cases |
 
 ## Business model canvas
@@ -18,15 +18,15 @@ rAIght is an **internal programme**. The customer is the SAP CIO office; the use
 |---|---|
 | **Customer segments** | Customer: CIO office · Users: process owners · Stakeholder: sustainability office |
 | **Value proposition** | Autonomy without emission growth – *Not more AI, but rAIght.* |
-| **Channels** | Inside the low-code platform process owners already use · training · pilot in HR recruiting, then unit by unit |
+| **Channels** | Connected to the tools process owners already use (Copilot Studio, Power Automate, OpenAI, n8n) · training · pilot in HR recruiting, then unit by unit |
 | **Customer relationships** | Self-service · community of practice for process owners · recognition for lean teams |
 | **Key activities** | Train process owners · run the dashboard · curate workflow templates · allocate and track carbon budgets · report savings |
-| **Key resources** | Ladder & triage · dashboard on existing logs · template store · carbon accounting per run |
-| **Key partners** | AI platform team (logs) · L&D · sustainability office · works council & data protection · hyperscalers (energy data) |
+| **Key resources** | Ladder & triage · dashboard on existing provider logs · one adapter per provider · template store · carbon accounting per run |
+| **Key partners** | AI tool owners / IT (provider admin access, logs) · L&D · sustainability office · works council & data protection · providers and hyperscalers (energy data) |
 | **Cost structure** | Training · dashboard build · **process owners' time** for conversions · change management |
 | **Value captured** *(instead of revenue)* | Lower compute cost and emissions · less maintenance · AI budget freed for use cases that really need an agent |
 
-*Revenue streams* are read as **value captured inside SAP**, since nothing is sold externally.
+*Revenue streams* in phase 1 are read as **value captured inside SAP**: lower token and licence costs, lower emissions. Phase 2 adds real revenue.
 
 ## Carbon budget and the rebound effect
 
@@ -47,9 +47,9 @@ A carbon budget per business unit guards against the **rebound effect**, where c
 3. Pre-approved template store – 2 votes
 4. Small-model-first default – team pick
 
-## Outlook (outside current scope)
+## Phase 2 – from internal tool to SAP offering (outside the IS 613 build)
 
-Once proven internally ("customer zero"), rAIght could become an **offering for SAP customers**, integrated into the agent/low-code platform and SAP's sustainability products.
+Once proven internally ("customer zero"), rAIght is **migrated into the SAP stack** (e.g. running on SAP BTP, with SAP's own agents as an additional source) and offered to **SAP customers as a service**, alongside SAP's sustainability products ([ADR 0005](../decisions/0005-scope-external-agents.md)).
 
 - **Opportunity:** benchmarks no one else can provide, because SAP combines AI usage with business process context (with customer consent, aggregated and anonymised).
 - **Tension:** cannibalisation of AI consumption revenue. Counter-argument: transparency builds trust and adoption.

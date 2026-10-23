@@ -1,24 +1,28 @@
 # 1 · Problem & thesis
 
-## The challenge
+## The commission
 
-> *Design the way SAP can become an Autonomous Enterprise while remaining Net Zero compatible.*
+SAP's **CIO office** asks an internal taskforce (us):
 
-Framing we agreed on: make SAP's existing Autonomous Enterprise strategy net zero compatible, focusing on **efficiency** rather than quantitative modelling. Success means business impact stays **neutral or better**.
+> *Employees build more and more AI automations with external tools – Copilot Studio, Power Automate, OpenAI, n8n. Cut the token costs and CO₂ emissions they cause, without slowing down adoption.*
+
+rAIght is the taskforce's answer. It starts as an internal tool ("customer zero") and can later be migrated into the SAP stack and sold to customers ([ADR 0005](../decisions/0005-scope-external-agents.md)).
+
+*Updated 23 Oct 2026: replaces the original framing as an answer to the SAP sustainability challenge.*
 
 ## The tension
 
-| Autonomous Enterprise | Net zero by 2030 |
+| More automation | Cost and climate targets |
 |---|---|
-| Agents and AI in more and more processes | At least 90% gross reduction of value-chain emissions (2023 baseline) |
-| Each agent plans, calls tools, checks and retries | Target validated by SBTi and tied to executive pay |
-| More autonomy → more compute → more energy | Residual emissions may only be neutralised by removals (max. 10%) |
+| Agents and AI steps in more and more processes, built by employees themselves | Token and licence costs grow with every agent |
+| Each agent plans, calls tools, checks and retries | SAP targets at least 90% reduction of value-chain emissions by 2030 – external AI compute counts towards that value chain |
+| Built with external tools nobody reviews centrally | No one sees what each automation consumes |
 
-Source: SAP sustainability challenge intro (1 Oct 2026); SAP Integrated Report.
+Source for the emissions target: SAP Integrated Report.
 
 ## Root cause
 
-The waste is not AI itself, but **using the wrong tool**: an agent doing a task a simple workflow could do. Process owners build their own automations, are trained on the tool but not on *when to use which step*, and never see what their agents consume.
+The waste is not AI itself, but **using the wrong tool**: an agent doing a task a simple workflow could do. Process owners build their own automations with external tools, are trained on the tool but not on *when to use which step*, and never see what their agents consume.
 
 ## Thesis: the automation ladder
 
