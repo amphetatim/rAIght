@@ -18,8 +18,11 @@ Each folder gets its own `CLAUDE.md` once it exists (structural change → confi
 
 ## Rules that apply to all code
 
-- The **frontend talks to the backend only via the endpoints in [docs/technical/api.md](../docs/technical/api.md)**. No direct data access.
+- **Demo-first** ([ADR 0004](../docs/decisions/0004-demo-first-scope.md)): build only what the [demo script](../docs/technical/demo-script.md) shows. If a task isn't in it, ask before building.
+- **All external data goes through the mock adapter layer**, with functions named like the real services (e.g. `agentPlatform.getRunLogs()`), reading fixtures. Never call real external systems.
+- The frontend gets data only via the endpoints/functions in [docs/technical/api.md](../docs/technical/api.md). They can be in-process functions or a thin fixture server; no auth, no production error handling.
 - The data shape is defined in [docs/technical/data-model.md](../docs/technical/data-model.md). If you need a new field, update that file in the same PR.
 - **Metrics are deterministic statistics** (counts, shares, sums) – no model calls ([ADR 0002](../docs/decisions/0002-no-ai-to-check-ai.md)).
-- **Mock data only.** Run logs are simulated for the four recruiting agents in the concept. No real personal data.
+- **Mock data only.** Run logs are simulated (fixtures must match the demo script's data requirements). No real personal data.
+- **Metrics must be real calculations** on that data. Never hard-code a metric result to make the demo look right; fix the fixtures instead.
 - Use glossary names in code: `agent_reason`, `same_path_share`, `run_log`, `ladder_step`, `uniform_agent`.

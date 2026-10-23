@@ -19,4 +19,5 @@ Format:
 | [0001](0001-process-owner-owns-the-lifecycle.md) | The process owner owns the whole lifecycle |
 | [0002](0002-no-ai-to-check-ai.md) | Monitoring uses statistics on existing logs, not AI |
 | [0003](0003-shared-claude-context-and-protected-files.md) | Shared Claude Code context and protected structural files (proposed) |
+| [0004](0004-demo-first-scope.md) | Demo-first scope: external systems mocked, metrics real, demo script as scope boundary |
 | *next* | Technology stack for IS 613 – to be decided |

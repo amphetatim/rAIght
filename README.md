@@ -21,6 +21,8 @@ rAIght gives the process owner three things:
 
 **The process owner owns the whole lifecycle.** There is no separate AI developer in the loop (see [ADR 0001](docs/decisions/0001-process-owner-owns-the-lifecycle.md)).
 
+**Scope of the implementation:** a demo along a defined [demo script](docs/technical/demo-script.md). SAP systems are named but mocked, the metrics are computed for real ([ADR 0004](docs/decisions/0004-demo-first-scope.md)).
+
 ## Repository structure
 
 ```
