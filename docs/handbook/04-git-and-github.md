@@ -55,16 +55,15 @@ The repo is owned by Tim's personal account (`amphetatim`). On personal repos Gi
 
 ## Project board
 
-A board on a personal account belongs to Tim. Setup:
+Created by Tim on 23 Oct 2026 in the repo (repo → *Projects*). It belongs to Tim's account, so **Tim manages access**.
 
-1. Profile → **Projects** → **New project** → *Board*, name `rAIght`
-2. Columns: *Backlog → Sprint → In progress → Review → Done*
-3. Fields: *Release* (R1/R2/R3), *Sprint*, *Workstream*
-4. Settings → **Manage access**: Wenxuan **Admin**, everyone else **Write**
-5. Link the project to the repo (repo → Projects tab → Link)
+1. Columns: *Backlog → Ready → In progress → In review → Done*
+2. Fields: *Release* (R1/R2/R3), *Workstream* (frontend, backend, data, business, pitch), optional *Size* (S/M/L)
+3. Settings → **Manage access**: Wenxuan **Admin**, everyone else **Write**
+4. Board rules (no Scrum Master – the board replaces the coordination): see *Ways of working* in [`TEAM.md`](../../TEAM.md)
 
 ## Labels
 
 `user-story`, `task`, `bug` (from the issue templates) plus workstreams: `frontend`, `backend`, `data`, `business`, `pitch`, `training`, `structure`.
 
-_Last updated: 2026-10-16_
+_Last updated: 2026-10-23_
